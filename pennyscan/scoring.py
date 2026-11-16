@@ -113,6 +113,9 @@ def score_ticker(t, snap, details, news, filings, social, twits, cfg, ai=None, f
     # --- float rotation: today's volume vs. the whole float (BYND-style squeeze math)
     fs = details.get("float_shares")
     rotation = (snap.get("volume") or 0) / fs if fs else None
+    if rotation is not None and rotation > 25:
+        # Yahoo's float is often stale after reverse splits / offerings; don't trust it.
+        rotation, fs = None, None
     att_rot = 0.0
     if rotation is not None:
         att_rot = _clamp(rotation, 0, 1)
