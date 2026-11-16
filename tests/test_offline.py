@@ -73,6 +73,7 @@ def test_full_scan_and_grading():
     cfg = config.load("/nonexistent.yaml")
     cfg["tracking"]["db_path"] = os.path.join(tmp, "t.db")
     cfg["report_path"] = os.path.join(tmp, "REPORT.md")
+    cfg["site_data_dir"] = os.path.join(tmp, "site")
     sent = []
     patch_sources(sent)
 
@@ -110,7 +111,11 @@ def test_full_scan_and_grading():
     report.write(cfg["report_path"], list(sigs.values()), st, cfg)
     text = open(cfg["report_path"]).read()
     assert "Track record" in text and "BYND" in text
-    print(text)
+    import json
+    latest = json.load(open(os.path.join(tmp, "site", "latest.json")))
+    assert latest["signals"][0]["news"] or latest["signals"][1]["news"]
+    assert "confidence" in latest["signals"][0]
+    print(text[:300])
     print("\n--- sample alert ---")
     print(sent[0][0]); print(sent[0][1])
 

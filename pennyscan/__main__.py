@@ -8,7 +8,7 @@ import argparse
 import logging
 import time
 
-from . import alerts, config, report, sources
+from . import alerts, config, export, report, sources
 from .scoring import score_ticker
 from .store import Store
 
@@ -80,6 +80,7 @@ def run_once(cfg):
             log.info("ALERT %s", title)
 
     report.write(cfg["report_path"], signals, store, cfg)
+    export.write(cfg["site_data_dir"], signals, store, cfg)
     print_table(signals)
     return signals
 

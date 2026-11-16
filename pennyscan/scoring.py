@@ -117,4 +117,17 @@ def score_ticker(t, snap, details, news, filings, social, twits, cfg):
         "reasons": reasons,
         "red_flags": flags,
         "news_count": len(news),
+        # Extra detail for the website
+        "news": [{"title": it["title"], "url": it.get("url", ""), "source": it.get("source", ""),
+                  "ts": it["ts"], "score": round(s, 2), "hits": hits[:4]}
+                 for s, hits, it in sorted(scored, key=lambda x: -x[2]["ts"])][:10],
+        "social": ({"mentions": social["mentions"], "mentions_24h_ago": social["mentions_24h_ago"]}
+                   if social else None),
+        "stocktwits": ({"bull": twits["bull"], "bear": twits["bear"]} if twits else None),
+        "short_pct_float": si,
+        "float_shares": details.get("float_shares"),
+        "market_cap": details.get("market_cap"),
+        "volume": snap.get("volume"),
+        "avg_volume": snap.get("avg_volume"),
+        "filings": filings[:8],
     }

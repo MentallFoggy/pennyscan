@@ -43,6 +43,7 @@ DEFAULTS = {
     },
     "schedule": {"loop_minutes": 10, "run_outside_market_hours": False},
     "report_path": "REPORT.md",
+    "site_data_dir": "docs/data",
 }
 
 ENV_OVERRIDES = {

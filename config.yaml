@@ -46,3 +46,4 @@ schedule:                    # only used by `python -m pennyscan loop`
   run_outside_market_hours: false
 
 report_path: REPORT.md
+site_data_dir: docs/data   # the website reads its data from here

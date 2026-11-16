@@ -125,5 +125,11 @@ class Store:
             "proven": n1 >= min_samples,
         }
 
+    def recent_calls(self, limit=60):
+        cols = ["ts", "day", "ticker", "lean", "strength", "price", "ret_1d", "hit_1d", "ret_5d", "hit_5d"]
+        rows = self.db.execute(
+            f"SELECT {', '.join(cols)} FROM calls ORDER BY ts DESC LIMIT ?", (limit,)).fetchall()
+        return [dict(zip(cols, r)) for r in rows]
+
     def total_calls(self):
         return self.db.execute("SELECT COUNT(*) FROM calls").fetchone()[0]
