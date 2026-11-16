@@ -40,7 +40,7 @@ sources:
   sec_user_agent: ""         # SEC requires "Your Name your@email.com" to use EDGAR
   use_stocktwits: true
   use_sec: true
-  use_wires: true            # press releases straight from PR Newswire / GlobeNewswire
+  use_wires: true            # press releases straight from PR Newswire
 
 ai:                          # AI news reading (needs ANTHROPIC_API_KEY secret)
   model: claude-haiku-5-5    # fast + cheap; each headline batch is read once, then cached

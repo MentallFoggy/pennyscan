@@ -374,11 +374,11 @@ _TICKER_RE = re.compile(
     r"(?:\s+[A-Za-z]+){0,3}\s*:\s*\$?([A-Z]{1,5})(?:\.[A-Z])?\b")
 
 
-def _rss_items(url, headers=None):
+def _rss_items(url, headers=None, timeout=30):
     try:
         r = requests.get(url, headers=headers or {"User-Agent": BROWSER_UA,
                                                   "Accept": "application/rss+xml, application/xml, text/xml, */*"},
-                         timeout=30)
+                         timeout=timeout)
         r.raise_for_status()
         root = ET_XML.fromstring(r.content)
     except Exception as e:  # noqa: BLE001
@@ -436,7 +436,7 @@ def sec_current_8k(user_agent):
     out = {}
     url = ("https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=8-K&company=&dateb="
            "&owner=include&start=0&count=100&output=atom")
-    for it in _rss_items(url, headers=headers):
+    for it in _rss_items(url, headers=headers, timeout=10):
         m = re.search(r"\((\d{6,10})\)", it["title"])
         if m and int(m.group(1)) in by_cik:
             out[by_cik[int(m.group(1))]] = it["ts"]

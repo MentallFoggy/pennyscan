@@ -44,8 +44,6 @@ DEFAULTS = {
         "wire_feeds": {
             "PR Newswire": "https://www.prnewswire.com/rss/news-releases-list.rss",
             "PR Newswire (finance)": "https://www.prnewswire.com/rss/financial-services-latest-news.rss",
-            "GlobeNewswire": "https://www.globenewswire.com/RssFeed/orgclass/1/feedTitle/"
-                             "GlobeNewswire%20-%20News%20about%20Public%20Companies",
         },
     },
     "ai": {

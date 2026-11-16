@@ -91,7 +91,7 @@ def analyze(ticker, name, snap, news, cfg, store, budget):
                 "https://api.anthropic.com/v1/messages",
                 headers={"x-api-key": ai["api_key"], "anthropic-version": "2023-06-01",
                          "content-type": "application/json"},
-                json={"model": ai["model"], "max_tokens": 900, "temperature": 0,
+                json={"model": ai["model"], "max_tokens": 900,
                       "system": SYSTEM,
                       "messages": [{"role": "user", "content": _prompt(ticker, name, snap, news)}]},
                 timeout=45,
