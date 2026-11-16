@@ -10,6 +10,12 @@ def _ascii(s):
     return s.encode("ascii", "ignore").decode()
 
 
+def _why(e):
+    """Error summary that never includes the URL (it contains your secret topic)."""
+    code = getattr(getattr(e, "response", None), "status_code", None)
+    return f"HTTP {code}" if code else type(e).__name__
+
+
 def send(cfg, title, body, bullish=True):
     a = cfg["alerts"]
     sent = False
@@ -24,14 +30,14 @@ def send(cfg, title, body, bullish=True):
             ).raise_for_status()
             sent = True
         except Exception as e:  # noqa: BLE001
-            log.warning("ntfy failed: %s", e)
+            log.warning("ntfy failed (%s). Check the NTFY_TOPIC secret.", _why(e))
     if a.get("discord_webhook"):
         try:
             requests.post(a["discord_webhook"], json={"content": f"**{title}**\n{body}"[:1900]},
                           timeout=10).raise_for_status()
             sent = True
         except Exception as e:  # noqa: BLE001
-            log.warning("discord failed: %s", e)
+            log.warning("discord failed (%s). Check the DISCORD_WEBHOOK secret.", _why(e))
     return sent
 
 
