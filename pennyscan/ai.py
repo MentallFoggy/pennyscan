@@ -101,8 +101,17 @@ def analyze(ticker, name, snap, news, cfg, store, budget):
             cached = _parse(text)
             store.ai_put(key, cached)
         except Exception as e:  # noqa: BLE001
-            code = getattr(getattr(e, "response", None), "status_code", None)
-            log.warning("AI read for %s failed (%s)", ticker, f"HTTP {code}" if code else type(e).__name__)
+            resp = getattr(e, "response", None)
+            detail = ""
+            try:
+                detail = resp.json().get("error", {}).get("message", "")[:200] if resp is not None else ""
+            except Exception:  # noqa: BLE001
+                pass
+            code = getattr(resp, "status_code", None)
+            log.warning("AI read for %s failed (%s) %s", ticker,
+                        f"HTTP {code}" if code else type(e).__name__, detail)
+            if code in (400, 401, 403):
+                budget[0] = 0  # same error will repeat for every stock; stop wasting calls
             return None
     items = {}
     for it in cached.get("items", []):

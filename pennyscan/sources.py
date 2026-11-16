@@ -23,7 +23,8 @@ import yfinance as yf
 
 log = logging.getLogger("pennyscan")
 ET = ZoneInfo("America/New_York")
-BROWSER_UA = "Mozilla/5.0 (X11; Linux x86_64) pennyscan/1.0"
+BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/130.0 Safari/537.36")
 
 
 def _get_json(url, headers=None, params=None, timeout=15):
@@ -375,7 +376,9 @@ _TICKER_RE = re.compile(
 
 def _rss_items(url, headers=None):
     try:
-        r = requests.get(url, headers=headers or {"User-Agent": BROWSER_UA}, timeout=15)
+        r = requests.get(url, headers=headers or {"User-Agent": BROWSER_UA,
+                                                  "Accept": "application/rss+xml, application/xml, text/xml, */*"},
+                         timeout=30)
         r.raise_for_status()
         root = ET_XML.fromstring(r.content)
     except Exception as e:  # noqa: BLE001
