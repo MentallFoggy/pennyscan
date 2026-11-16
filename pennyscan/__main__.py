@@ -8,7 +8,7 @@ import argparse
 import logging
 import time
 
-from . import alerts, config, export, report, sources
+from . import ai, alerts, config, export, report, sources
 from .scoring import score_ticker
 from .store import Store
 
@@ -16,12 +16,17 @@ log = logging.getLogger("pennyscan")
 
 
 def build_universe(cfg):
-    u = cfg["universe"]
+    u, src, sig = cfg["universe"], cfg["sources"], cfg["signals"]
     social = sources.reddit_trending() if u["use_reddit_trending"] else {}
     tickers = set(social) | set(u["watchlist"])
     if u["use_market_movers"]:
         tickers |= sources.market_movers(u["screeners"])
-    return tickers, social
+    wires = sources.wire_releases(src["wire_feeds"], sig["news_lookback_hours"]) if src["use_wires"] else {}
+    eightk = sources.sec_current_8k(src["sec_user_agent"]) if src["use_sec"] else {}
+    tickers |= set(wires) | set(eightk)
+    log.info("universe: %d tickers (%d from press releases, %d fresh 8-Ks)",
+             len(tickers), len(wires), len(eightk))
+    return tickers, social, wires, eightk
 
 
 def run_once(cfg):
@@ -32,38 +37,55 @@ def run_once(cfg):
     if graded:
         log.info("graded %d past calls", graded)
 
-    tickers, social = build_universe(cfg)
-    log.info("universe: %d tickers", len(tickers))
+    tickers, social, wires, eightk = build_universe(cfg)
     snaps = sources.price_snapshot(tickers)
 
     watch = set(u["watchlist"])
-    cands = [k for k, v in snaps.items()
-             if k in watch or (u["min_price"] <= v["price"] <= u["max_price"]
-                               and v["avg_volume"] >= u["min_avg_volume"])]
+
+    def is_penny(k, v):
+        return k in watch or (u["min_price"] <= v["price"] <= u["max_price"]
+                              and v["avg_volume"] >= u["min_avg_volume"])
+
+    pennies = {k: v for k, v in snaps.items() if is_penny(k, v)}
+    # Freshest prices (pre-market / after-hours) + mini charts, one download.
+    sources.merge_intraday(pennies, sources.intraday(pennies))
 
     # Look closest at whatever is getting the most unusual attention.
     def heat(k):
         sm = social.get(k, {})
-        return (k in watch, snaps[k]["rel_volume"] + sm.get("mentions", 0) / 20 + abs(snaps[k]["chg_pct"]) / 10)
+        v = pennies[k]
+        fresh_news = 3 if k in wires else 0
+        fresh_filing = 2 if k in eightk else 0
+        return (k in watch, v["rel_volume"] + sm.get("mentions", 0) / 20 + abs(v["chg_pct"]) / 10
+                + fresh_news + fresh_filing)
 
-    cands = sorted(cands, key=heat, reverse=True)[: u["max_tickers_per_run"]]
+    cands = sorted(pennies, key=heat, reverse=True)[: u["max_tickers_per_run"]]
     log.info("scanning %d penny-stock candidates", len(cands))
 
+    ai_budget = [cfg["ai"]["max_calls_per_run"]]
     signals = []
     for k in cands:
         try:
             details = sources.ticker_details(k)
-            news = sources.news_yahoo(k, cfg["signals"]["news_lookback_hours"])
-            news += sources.news_finnhub(k, s["finnhub_key"], cfg["signals"]["news_lookback_hours"])
+            lb = cfg["signals"]["news_lookback_hours"]
+            news = sources.news_yahoo(k, lb) + sources.news_finnhub(k, s["finnhub_key"], lb) + wires.get(k, [])
             news = sources.dedupe_news(news)
             filings = (sources.sec_recent_filings(k, s["sec_user_agent"],
                                                   cfg["signals"]["dilution_lookback_days"])
                        if s["use_sec"] else [])
             twits = sources.stocktwits(k) if s["use_stocktwits"] else None
-            signals.append(score_ticker(k, snaps[k], details, news, filings,
-                                        social.get(k), twits, cfg))
+            ai_read = ai.analyze(k, details.get("name", k), pennies[k], news, cfg, store, ai_budget)
+            sig = score_ticker(k, pennies[k], details, news, filings, social.get(k), twits, cfg,
+                               ai=ai_read, fresh_8k=eightk.get(k))
+            signals.append(sig)
+            store.record_baseline(k, sig["price"])
         except Exception as e:  # noqa: BLE001
             log.warning("scoring %s failed: %s", k, e)
+    store.commit()
+    used = cfg["ai"]["max_calls_per_run"] - ai_budget[0]
+    if cfg["ai"].get("api_key"):
+        log.info("AI read news for %d stocks (%d new API calls)",
+                 sum(1 for x in signals if x.get("ai_takeaway")), used)
 
     a = cfg["alerts"]
     for sig in sorted(signals, key=lambda x: -x["strength"]):
@@ -111,7 +133,7 @@ def main():
         run_once(cfg)
     elif args.command == "grade":
         st = Store(cfg["tracking"]["db_path"])
-        print(f"graded {st.grade(cfg['tracking']['win_threshold_pct'])} calls")
+        print(f"graded {st.grade(cfg['tracking']['win_threshold_pct'], force=True)} calls")
     elif args.command == "test-alert":
         ok = alerts.send(cfg, "pennyscan test", "If you can read this, alerts work.")
         print("sent" if ok else "not sent: set ntfy_topic or discord_webhook in config.yaml")

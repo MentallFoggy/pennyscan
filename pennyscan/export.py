@@ -33,13 +33,15 @@ def write(out_dir, signals, store, cfg):
         "settings": {"max_price": cfg["universe"]["max_price"],
                      "win_threshold_pct": t["win_threshold_pct"],
                      "min_samples": t["min_samples_for_confidence"],
-                     "alert_min_strength": cfg["alerts"]["min_strength"]},
+                     "alert_min_strength": cfg["alerts"]["min_strength"],
+                     "ai_enabled": bool(cfg["ai"].get("api_key"))},
         "signals": rows,
     }
     track = {
         "generated_at": latest["generated_at"],
         "win_threshold_pct": t["win_threshold_pct"],
         "buckets": store.track_record(),
+        "baseline": store.baseline_stats(t["win_threshold_pct"]),
         "recent": store.recent_calls(80),
     }
     for name, obj in (("latest.json", latest), ("track.json", track)):

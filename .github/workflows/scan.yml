@@ -2,8 +2,8 @@ name: pennyscan
 
 on:
   schedule:
-    # Every 15 min, Mon-Fri, ~7am-5pm Eastern (GitHub uses UTC; runs can lag a few minutes)
-    - cron: "*/15 12-21 * * 1-5"
+    # Every 15 min, Mon-Fri, ~4am-5pm Eastern incl. pre-market (GitHub uses UTC; runs can lag)
+    - cron: "*/15 9-21 * * 1-5"
   workflow_dispatch: {}   # adds a "Run workflow" button for a manual scan
 
 permissions:
@@ -34,6 +34,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
           SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Save track record + report
         run: |

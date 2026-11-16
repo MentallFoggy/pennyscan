@@ -44,7 +44,10 @@ def send(cfg, title, body, bullish=True):
 def format_alert(sig, conf):
     arrow = "UP" if sig["lean"] == "BULLISH" else "DOWN"
     title = f"{sig['ticker']} {sig['lean']} {sig['strength']}/10 ({arrow}) ${sig['price']:.2f}"
-    lines = [f"{sig['name']}: {sig['chg_pct']:+.1f}% today, vol {sig['rel_volume']:.1f}x"]
+    sess = {"pre": " (pre-market)", "post": " (after-hours)"}.get(sig.get("session"), "")
+    lines = [f"{sig['name']}: {sig['chg_pct']:+.1f}%{sess}, vol {sig['rel_volume']:.1f}x"]
+    if sig.get("ai_takeaway"):
+        lines.append(f"AI: {sig['ai_takeaway']}")
     lines += [f"- {r}" for r in sig["reasons"][:4]]
     if sig["red_flags"]:
         lines.append("Red flags:")

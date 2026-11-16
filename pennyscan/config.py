@@ -40,6 +40,18 @@ DEFAULTS = {
         "sec_user_agent": "",
         "use_stocktwits": True,
         "use_sec": True,
+        "use_wires": True,
+        "wire_feeds": {
+            "PR Newswire": "https://www.prnewswire.com/rss/news-releases-list.rss",
+            "PR Newswire (finance)": "https://www.prnewswire.com/rss/financial-services-latest-news.rss",
+            "GlobeNewswire": "https://www.globenewswire.com/RssFeed/orgclass/1/feedTitle/"
+                             "GlobeNewswire%20-%20News%20about%20Public%20Companies",
+        },
+    },
+    "ai": {
+        "api_key": "",
+        "model": "claude-haiku-5-5",
+        "max_calls_per_run": 15,
     },
     "schedule": {"loop_minutes": 10, "run_outside_market_hours": False},
     "report_path": "REPORT.md",
@@ -51,6 +63,7 @@ ENV_OVERRIDES = {
     "DISCORD_WEBHOOK": ("alerts", "discord_webhook"),
     "FINNHUB_KEY": ("sources", "finnhub_key"),
     "SEC_USER_AGENT": ("sources", "sec_user_agent"),
+    "ANTHROPIC_API_KEY": ("ai", "api_key"),
 }
 
 

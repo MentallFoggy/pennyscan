@@ -21,28 +21,51 @@ def _clamp(x, lo=-1.0, hi=1.0):
     return max(lo, min(hi, x))
 
 
-def score_ticker(t, snap, details, news, filings, social, twits, cfg):
+def score_ticker(t, snap, details, news, filings, social, twits, cfg, ai=None, fresh_8k=None):
     sig_cfg = cfg["signals"]
     w = sig_cfg["weights"]
     reasons, flags = [], []
 
-    # --- news
+    # --- news (AI read when available, keyword rules otherwise)
+    ai_items = (ai or {}).get("items", {})
     news_score, scored = 0.0, []
     if news:
         num = den = 0.0
         now = time.time()
         for it in news:
-            s, hits = score_item(it)
+            a = ai_items.get(it["title"])
+            if a:
+                s = a["impact"] * (1.0 if a["material"] else 0.25)
+                hits = [a["category"]]
+                extra = {"ai_note": a["note"], "category": a["category"], "material": a["material"]}
+            else:
+                s, hits = score_item(it)
+                extra = {}
             age_h = max(0.0, (now - it["ts"]) / 3600)
             wt = 0.5 ** (age_h / 12)  # half-life 12h
             num += s * wt
             den += wt
-            scored.append((s, hits, it))
+            scored.append((s, hits, it, extra))
         news_score = num / den if den else 0.0
-        for s, hits, it in sorted(scored, key=lambda x: -abs(x[0]))[:2]:
+        for s, hits, it, extra in sorted(scored, key=lambda x: -abs(x[0]))[:2]:
             tag = "+" if s > 0.1 else "-" if s < -0.1 else "~"
             why = f" [{', '.join(hits[:3])}]" if hits else ""
             reasons.append(f"News {tag}: {it['title'][:110]}{why}")
+        fresh = [it for it in news if it.get("wire") and time.time() - it["ts"] < 3 * 3600]
+        if fresh:
+            mins = int((time.time() - max(i["ts"] for i in fresh)) / 60)
+            reasons.append(f"Fresh press release {mins}m ago (straight from the wire)")
+        cats = {x[3].get("category") for x in scored if x[3].get("material")}
+        for cat, msg in (("offering/dilution", "News: company is raising money (dilution)"),
+                         ("reverse split", "News: reverse split"),
+                         ("bankruptcy/restructuring", "News: bankruptcy / restructuring"),
+                         ("listing/compliance", "News: listing / compliance problem")):
+            if cat in cats:
+                flags.append(msg)
+        if any(x[3].get("category") == "paid promotion" for x in scored):
+            flags.append("Paid promotion in the news flow: hype warning")
+    if fresh_8k and time.time() - fresh_8k < 6 * 3600:
+        reasons.append(f"8-K just filed with the SEC ({int((time.time() - fresh_8k) / 60)}m ago)")
 
     # --- SEC filings
     dilution = [f for f in filings if f["form"] in DILUTION_FORMS]
@@ -87,7 +110,20 @@ def score_ticker(t, snap, details, news, filings, social, twits, cfg):
             direction += 0.15
     direction = _clamp(direction)
 
-    attention = max(att_vol, att_social)
+    # --- float rotation: today's volume vs. the whole float (BYND-style squeeze math)
+    fs = details.get("float_shares")
+    rotation = (snap.get("volume") or 0) / fs if fs else None
+    att_rot = 0.0
+    if rotation is not None:
+        att_rot = _clamp(rotation, 0, 1)
+        if rotation >= 0.5:
+            reasons.append(f"Volume today = {rotation:.1f}x the entire float")
+        if rotation >= 1 and direction > 0:
+            direction = _clamp(direction + 0.1)
+    if fs and fs < 10e6:
+        reasons.append(f"Low float: {fs / 1e6:.1f}M shares (moves fast both ways)")
+
+    attention = max(att_vol, att_social, att_rot)
     strength = round(_clamp(abs(direction) * (0.5 + 0.5 * attention) * 12, 1, 10))
 
     price = snap.get("price", 0)
@@ -119,8 +155,14 @@ def score_ticker(t, snap, details, news, filings, social, twits, cfg):
         "news_count": len(news),
         # Extra detail for the website
         "news": [{"title": it["title"], "url": it.get("url", ""), "source": it.get("source", ""),
-                  "ts": it["ts"], "score": round(s, 2), "hits": hits[:4]}
-                 for s, hits, it in sorted(scored, key=lambda x: -x[2]["ts"])][:10],
+                  "ts": it["ts"], "score": round(s, 2), "hits": hits[:4], "wire": bool(it.get("wire")),
+                  **extra}
+                 for s, hits, it, extra in sorted(scored, key=lambda x: -x[2]["ts"])][:10],
+        "ai_takeaway": (ai or {}).get("takeaway") or None,
+        "session": snap.get("session", "regular"),
+        "spark": snap.get("spark", []),
+        "prev_close": snap.get("prev_close"),
+        "float_rotation": rotation,
         "social": ({"mentions": social["mentions"], "mentions_24h_ago": social["mentions_24h_ago"]}
                    if social else None),
         "stocktwits": ({"bull": twits["bull"], "bear": twits["bear"]} if twits else None),

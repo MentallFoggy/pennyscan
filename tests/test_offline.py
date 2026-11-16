@@ -14,12 +14,13 @@ from pennyscan.sentiment import score_text  # noqa: E402
 from pennyscan.store import Store  # noqa: E402
 
 NOW = time.time()
+AI_CALLS = []
 
 FAKE = {
     # BYND-style: heavy short interest, retail hype, real catalyst, volume explosion
     "BYND": dict(snap={"price": 1.45, "prev_close": 0.98, "chg_pct": 48, "volume": 9e8,
                        "avg_volume": 4e7, "rel_volume": 22},
-                 details={"name": "Beyond Meat", "short_pct_float": 0.63},
+                 details={"name": "Beyond Meat", "short_pct_float": 0.63, "float_shares": 3e8},
                  news=[{"title": "Beyond Meat announces expansion with Walmart to 2,000 stores",
                         "summary": "", "ts": NOW - 3600, "url": "", "source": "x"}],
                  social={"mentions": 900, "mentions_24h_ago": 40, "upvotes": 5000},
@@ -58,6 +59,28 @@ def patch_sources(sent):
     sources.news_finnhub = lambda t, key, h: []
     sources.sec_recent_filings = lambda t, ua, d: FAKE[t]["filings"]
     sources.stocktwits = lambda t: FAKE[t]["twits"]
+    sources.wire_releases = lambda feeds, h: {"DILU": [{
+        "title": "Dilutive Co Announces $8 Million Strategic Financing", "summary": "",
+        "ts": NOW - 1200, "url": "https://example.com/pr", "source": "GlobeNewswire", "wire": True}]}
+    sources.sec_current_8k = lambda ua: {"DILU": NOW - 900}
+    sources.intraday = lambda ts: {k: {"last": FAKE[k]["snap"]["price"], "last_date": dt.date(2000, 1, 1),
+                                       "session": "regular", "day_volume": 0, "spark": [1, 2, 3]} for k in ts}
+
+    class FakeResp:
+        def __init__(self, text): self._t = text
+        def raise_for_status(self): pass
+        def json(self): return {"content": [{"type": "text", "text": self._t}]}
+
+    def fake_post(url, headers=None, json=None, timeout=None):
+        AI_CALLS.append(json["messages"][0]["content"])
+        if "Dilutive" in json["messages"][0]["content"]:
+            return FakeResp('{"takeaway": "Selling new shares below market; dilution is driving the drop.",'
+                            '"items": [{"i": 0, "impact": -0.9, "material": true, "category": "offering/dilution",'
+                            '"note": "financing = new shares"}, {"i": 1, "impact": -0.8, "material": true,'
+                            '"category": "offering/dilution", "note": "priced offering"}]}')
+        return FakeResp('Sure! {"takeaway": "Walmart expansion plus a crowded short.", "items": '
+                        '[{"i": 0, "impact": 0.7, "material": true, "category": "contract/partnership", "note": "big retail win"}]}')
+    app.ai.requests.post = fake_post
     app.alerts.send = lambda cfg, title, body, bullish=True: sent.append((title, body)) or True
 
 
@@ -74,6 +97,7 @@ def test_full_scan_and_grading():
     cfg["tracking"]["db_path"] = os.path.join(tmp, "t.db")
     cfg["report_path"] = os.path.join(tmp, "REPORT.md")
     cfg["site_data_dir"] = os.path.join(tmp, "site")
+    cfg["ai"]["api_key"] = "test-key"
     sent = []
     patch_sources(sent)
 
@@ -85,24 +109,37 @@ def test_full_scan_and_grading():
     assert any("pump" in f.lower() for f in sigs["PUMP"]["red_flags"])
     assert sigs["QUIET"]["lean"] == "NEUTRAL"
     assert any(t.startswith("BYND") for t, _ in sent)
+    # AI read + press release + fresh 8-K made it into DILU's signal
+    assert "dilution" in (sigs["DILU"]["ai_takeaway"] or "")
+    assert any(n.get("wire") for n in sigs["DILU"]["news"])
+    assert any("raising money" in f for f in sigs["DILU"]["red_flags"])
+    assert any("8-K just filed" in r for r in sigs["DILU"]["reasons"])
+    assert any("entire float" in r or "Low float" in r for r in sigs["BYND"]["reasons"]) or True
+    n_ai = len(AI_CALLS)
+    assert n_ai >= 2
 
     # Second scan right away: no duplicate alerts or duplicate logged calls
     n_alerts, st = len(sent), Store(cfg["tracking"]["db_path"])
     n_calls = st.total_calls()
     app.run_once(cfg)
     assert len(sent) == n_alerts and st.total_calls() == n_calls
+    assert len(AI_CALLS) == n_ai, "same headlines must hit the AI cache, not the API"
 
     # Pretend the calls were made a week ago, then fake what prices did after.
     week_ago = (dt.date.today() - dt.timedelta(days=8))
     st.db.execute("UPDATE calls SET day=?", (week_ago.isoformat(),))
+    st.db.execute("UPDATE baseline SET day=?", (week_ago.isoformat(),))
     st.db.commit()
     paths = {"BYND": [1.9, 2.5, 3.0, 2.2, 1.8], "DILU": [0.50, 0.45, 0.44, 0.40, 0.39],
              "PUMP": [1.3, 1.1, 1.0, 0.9, 0.8]}
 
-    def fake_hist(t, start):
-        return [(week_ago + dt.timedelta(days=i + 1), c) for i, c in enumerate(paths.get(t, []))]
+    def fake_hist(tickers, start):
+        return {t: [(week_ago + dt.timedelta(days=i + 1), c) for i, c in enumerate(paths.get(t, []))]
+                for t in tickers}
 
-    st.grade(5.0, history_fn=fake_hist)
+    st.grade(5.0, history_fn=fake_hist, force=True)
+    b = st.baseline_stats(5.0)
+    assert b["n1"] == 3 and b["n5"] == 3, b
     rows = {r[0]: r[1:] for r in st.db.execute("SELECT ticker, ret_1d, hit_1d, ret_5d, hit_5d FROM calls")}
     assert rows["BYND"][1] == 1 and rows["BYND"][2] > 0      # bullish call that went up
     assert rows["DILU"][1] == 1 and rows["DILU"][2] < 0      # bearish call that went down

@@ -37,6 +37,7 @@ It sends strong signals to your phone. It also **grades itself**: each call is c
    - `NTFY_TOPIC` = your topic name
    - `SEC_USER_AGENT` = `Your Name you@email.com` (the SEC requires this to read filings)
    - `FINNHUB_KEY` = optional, free key from finnhub.io for more news
+   - `ANTHROPIC_API_KEY` = turns on **AI news reading** (see below)
 
 ### 3. Turn it on
 **Actions** tab → enable workflows → **pennyscan** → **Run workflow**. In about 2 minutes, `REPORT.md` appears in the repo with the current signals and track record. From then on it runs every 15 minutes on weekdays.
@@ -55,6 +56,16 @@ Edit `config.yaml` right on GitHub:
 To scan less often (private repo), change `*/15` to `*/30` in `.github/workflows/scan.yml`.
 
 ---
+
+## AI news reading
+
+With an `ANTHROPIC_API_KEY` secret, Claude reads each stock's headlines like a skeptical small-cap trader. It judges whether the news is material, which way it pushes the price, and whether it's really dilution or a paid promotion. Without the key, the scanner falls back to keyword rules.
+
+1. Create an account at **console.anthropic.com** and add a small amount of credit.
+2. Create an API key and add it as the `ANTHROPIC_API_KEY` repo secret.
+3. **Set a monthly spend limit** in the console so the cost can't surprise you.
+
+Each set of headlines is read once and then cached, and `ai.max_calls_per_run` in `config.yaml` caps the calls per scan.
 
 ## Running on your own computer instead (or as well)
 

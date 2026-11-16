@@ -40,6 +40,11 @@ sources:
   sec_user_agent: ""         # SEC requires "Your Name your@email.com" to use EDGAR
   use_stocktwits: true
   use_sec: true
+  use_wires: true            # press releases straight from PR Newswire / GlobeNewswire
+
+ai:                          # AI news reading (needs ANTHROPIC_API_KEY secret)
+  model: claude-haiku-5-5    # fast + cheap; each headline batch is read once, then cached
+  max_calls_per_run: 15      # caps API calls per scan to keep cost predictable
 
 schedule:                    # only used by `python -m pennyscan loop`
   loop_minutes: 10

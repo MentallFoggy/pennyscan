@@ -15,6 +15,12 @@ CREATE TABLE IF NOT EXISTS calls (
     ret_1d REAL, hit_1d INTEGER, ret_5d REAL, hit_5d INTEGER
 );
 CREATE TABLE IF NOT EXISTS alerts (ticker TEXT, ts REAL, lean TEXT, strength INTEGER);
+CREATE TABLE IF NOT EXISTS baseline (
+    day TEXT, ticker TEXT, price REAL, ret_1d REAL, ret_5d REAL,
+    PRIMARY KEY (day, ticker)
+);
+CREATE TABLE IF NOT EXISTS ai_cache (key TEXT PRIMARY KEY, ts REAL, result TEXT);
+CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT);
 """
 
 BUCKETS = [(1, 3), (4, 6), (7, 8), (9, 10)]
@@ -64,36 +70,99 @@ class Store:
         self.db.execute("INSERT INTO alerts VALUES (?,?,?,?)", (ticker, time.time(), lean, strength))
         self.db.commit()
 
+    # ------------------------------------------------------------ AI cache
+    def ai_get(self, key):
+        r = self.db.execute("SELECT result FROM ai_cache WHERE key=?", (key,)).fetchone()
+        return json.loads(r[0]) if r else None
+
+    def ai_put(self, key, result):
+        self.db.execute("INSERT OR REPLACE INTO ai_cache VALUES (?,?,?)",
+                        (key, time.time(), json.dumps(result)))
+        # keep the cache from growing forever
+        self.db.execute("DELETE FROM ai_cache WHERE ts < ?", (time.time() - 14 * 86400,))
+        self.db.commit()
+
+    # ------------------------------------------------------------ random baseline
+    def record_baseline(self, ticker, price):
+        """Every scanned penny stock, once per day: 'what if you picked at random?'"""
+        if not price:
+            return
+        self.db.execute("INSERT OR IGNORE INTO baseline (day, ticker, price) VALUES (?,?,?)",
+                        (sources.now_et().date().isoformat(), ticker, price))
+
+    def commit(self):
+        self.db.commit()
+
+    def baseline_stats(self, win_pct):
+        r = self.db.execute(
+            "SELECT COUNT(ret_1d), SUM(ret_1d >= ?), SUM(ret_1d <= ?), AVG(ret_1d),"
+            "       COUNT(ret_5d), SUM(ret_5d >= ?), SUM(ret_5d <= ?), AVG(ret_5d) FROM baseline",
+            (win_pct, -win_pct, win_pct, -win_pct)).fetchone()
+        n1, up1, dn1, avg1, n5, up5, dn5, avg5 = r
+        f = lambda a, n: (a or 0) / n if n else None  # noqa: E731
+        return {"n1": n1, "up1": f(up1, n1), "down1": f(dn1, n1), "avg1": avg1,
+                "n5": n5, "up5": f(up5, n5), "down5": f(dn5, n5), "avg5": avg5}
+
     # ------------------------------------------------------------ grading
-    def grade(self, win_pct, history_fn=None):
-        """Fill in 1-day and 5-day returns for calls old enough to judge."""
-        history_fn = history_fn or sources.history_closes
+    def _meta(self, k, v=None):
+        if v is None:
+            r = self.db.execute("SELECT v FROM meta WHERE k=?", (k,)).fetchone()
+            return r[0] if r else None
+        self.db.execute("INSERT OR REPLACE INTO meta VALUES (?,?)", (k, str(v)))
+        self.db.commit()
+
+    def grade(self, win_pct, history_fn=None, force=False):
+        """Fill in 1-day and 5-day returns for calls (and baseline picks) old enough
+        to judge. Uses daily closes, so it only needs to run every few hours."""
+        last = float(self._meta("last_grade") or 0)
+        if not force and time.time() - last < 3 * 3600:
+            return 0
+        history_fn = history_fn or sources.history_closes_batch
         today = sources.now_et().date().isoformat()
-        rows = self.db.execute(
+        calls = self.db.execute(
             "SELECT id, day, ticker, lean, price, ret_1d FROM calls"
-            " WHERE ret_5d IS NULL AND day < ?", (today,)).fetchall()
-        cache, graded = {}, 0
-        for cid, day, ticker, lean, entry, ret1 in rows:
-            key = (ticker, day)
-            if key not in cache:
-                cache[key] = history_fn(ticker, day)
-            after = [(d, c) for d, c in cache[key] if d.isoformat() > day]
-            if not after or not entry:
+            " WHERE ret_5d IS NULL AND day < ? AND day > ?",
+            (today, (sources.now_et().date() - dt.timedelta(days=30)).isoformat())).fetchall()
+        base = self.db.execute(
+            "SELECT day, ticker, price, ret_1d FROM baseline WHERE ret_5d IS NULL AND day < ? AND day > ?",
+            (today, (sources.now_et().date() - dt.timedelta(days=30)).isoformat())).fetchall()
+        tickers = {r[2] for r in calls} | {r[1] for r in base}
+        if not tickers:
+            self._meta("last_grade", time.time())
+            return 0
+        start = min([r[1] for r in calls] + [r[0] for r in base])
+        hist = history_fn(sorted(tickers), start)
+
+        def after(ticker, day):
+            return [c for d, c in hist.get(ticker, []) if d.isoformat() > day]
+
+        graded = 0
+        for cid, day, ticker, lean, entry, ret1 in calls:
+            a = after(ticker, day)
+            if not a or not entry:
                 continue
             sign = 1 if lean == "BULLISH" else -1
-
-            def judge(close):
-                r = (close / entry - 1) * 100
-                return r, int(sign * r >= win_pct)
-
             if ret1 is None:
-                r, h = judge(after[0][1])
-                self.db.execute("UPDATE calls SET ret_1d=?, hit_1d=? WHERE id=?", (r, h, cid))
+                r = (a[0] / entry - 1) * 100
+                self.db.execute("UPDATE calls SET ret_1d=?, hit_1d=? WHERE id=?",
+                                (r, int(sign * r >= win_pct), cid))
                 graded += 1
-            if len(after) >= 5:
-                r, h = judge(after[4][1])
-                self.db.execute("UPDATE calls SET ret_5d=?, hit_5d=? WHERE id=?", (r, h, cid))
+            if len(a) >= 5:
+                r = (a[4] / entry - 1) * 100
+                self.db.execute("UPDATE calls SET ret_5d=?, hit_5d=? WHERE id=?",
+                                (r, int(sign * r >= win_pct), cid))
+        for day, ticker, entry, ret1 in base:
+            a = after(ticker, day)
+            if not a or not entry:
+                continue
+            if ret1 is None:
+                self.db.execute("UPDATE baseline SET ret_1d=? WHERE day=? AND ticker=?",
+                                ((a[0] / entry - 1) * 100, day, ticker))
+            if len(a) >= 5:
+                self.db.execute("UPDATE baseline SET ret_5d=? WHERE day=? AND ticker=?",
+                                ((a[4] / entry - 1) * 100, day, ticker))
         self.db.commit()
+        self._meta("last_grade", time.time())
         return graded
 
     # ------------------------------------------------------------ track record
