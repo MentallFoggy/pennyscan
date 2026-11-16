@@ -1,0 +1,48 @@
+# ---------------------------------------------------------------------------
+# pennyscan settings. Secrets (ntfy topic, keys) can go here OR, safer on
+# GitHub, in repo Secrets: NTFY_TOPIC, DISCORD_WEBHOOK, FINNHUB_KEY, SEC_USER_AGENT
+# ---------------------------------------------------------------------------
+
+universe:
+  min_price: 0.10
+  max_price: 5.00            # what counts as a "penny stock"
+  min_avg_volume: 200000     # skip stocks too thin to trade
+  max_tickers_per_run: 40    # deep-checks the 40 "hottest" each scan
+  watchlist: []              # always check these, any price. e.g. [BYND, OPEN, PLUG]
+  use_reddit_trending: true  # tickers trending on Reddit (ApeWisdom)
+  use_market_movers: true    # Yahoo small-cap gainers / most active / most shorted
+
+signals:
+  news_lookback_hours: 24
+  dilution_lookback_days: 30
+  neutral_band: 0.15         # how strong the evidence must be to lean either way
+  weights:                   # tune these once the track record shows what works
+    news: 0.45
+    stocktwits: 0.20
+    momentum: 0.20
+    dilution: 0.50           # penalty when the company filed to sell new shares
+  squeeze_short_pct: 0.20    # short interest above 20% of float = squeeze fuel
+
+alerts:
+  ntfy_topic: ""             # free phone alerts: see README step 2
+  discord_webhook: ""        # optional
+  min_strength: 7            # only ping your phone for 7/10 or stronger
+  cooldown_hours: 6          # don't re-ping the same stock unless it gets stronger
+
+tracking:
+  db_path: data/pennyscan.db
+  log_min_strength: 4        # calls this strong or stronger get graded
+  win_threshold_pct: 5       # a "hit" = moved 5%+ the called way
+  min_samples_for_confidence: 20
+
+sources:
+  finnhub_key: ""            # optional, free at finnhub.io: more news
+  sec_user_agent: ""         # SEC requires "Your Name your@email.com" to use EDGAR
+  use_stocktwits: true
+  use_sec: true
+
+schedule:                    # only used by `python -m pennyscan loop`
+  loop_minutes: 10
+  run_outside_market_hours: false
+
+report_path: REPORT.md
