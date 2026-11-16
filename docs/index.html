@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>pennyscan</title>
+<meta name="theme-color" content="#0b0f14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="pennyscan">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<link rel="manifest" href="manifest.json">
+<style>
+:root{
+  --bg:#0b0f14;--panel:#121820;--panel2:#18202a;--line:#232d39;--text:#e6edf3;--dim:#8b98a8;--faint:#5b6878;
+  --up:#2fd27c;--up-bg:rgba(47,210,124,.12);--down:#ff5c6c;--down-bg:rgba(255,92,108,.12);
+  --warn:#ffb547;--warn-bg:rgba(255,181,71,.12);--accent:#6aa8ff;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.up{color:var(--up)}.down{color:var(--down)}.dim{color:var(--dim)}.warn{color:var(--warn)}
+
+header{position:sticky;top:0;z-index:5;background:rgba(11,15,20,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  padding:calc(env(safe-area-inset-top) + 10px) 16px 0;border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.02em}
+.logo span{color:var(--up)}
+.updated{font-size:12px;color:var(--dim);text-align:right}
+.updated b{color:var(--text);font-weight:600}
+.refresh{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;font-size:13px;cursor:pointer}
+nav{display:flex;gap:4px;margin-top:10px}
+nav button{flex:1;background:none;border:none;color:var(--dim);font:600 14px inherit;font-family:inherit;padding:10px 0;border-bottom:2px solid transparent;cursor:pointer}
+nav button.on{color:var(--text);border-color:var(--up)}
+
+main{max-width:760px;margin:0 auto;padding:12px 12px calc(40px + env(safe-area-inset-bottom))}
+.stale{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:10px}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.summary div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px}
+.summary b{display:block;font-size:20px}
+.summary small{color:var(--dim);font-size:12px}
+
+.controls{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{background:var(--panel);border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;font-family:inherit}
+.chip.on{background:var(--text);color:var(--bg);border-color:var(--text);font-weight:600}
+.search{flex:1 1 100%;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 12px;font-size:15px;font-family:inherit}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:8px;overflow:hidden}
+.card.neutral{opacity:.6}
+.row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:12px 14px;cursor:pointer}
+.tk{font-weight:800;font-size:17px;letter-spacing:.01em}
+.nm{color:var(--dim);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw}
+.px{text-align:right}
+.px b{display:block;font-size:15px}
+.px span{font-size:13px}
+.lean{min-width:76px;text-align:center;border-radius:10px;padding:5px 8px}
+.lean.BULLISH{background:var(--up-bg);color:var(--up)}
+.lean.BEARISH{background:var(--down-bg);color:var(--down)}
+.lean.NEUTRAL{background:var(--panel2);color:var(--dim)}
+.lean b{display:block;font-size:12px;letter-spacing:.06em}
+.meter{display:flex;gap:2px;margin-top:4px;justify-content:center}
+.meter i{width:5px;height:6px;border-radius:1px;background:currentColor;opacity:.18}
+.meter i.f{opacity:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 12px;margin-top:-4px}
+.tag{font-size:12px;color:var(--dim);background:var(--panel2);border-radius:6px;padding:2px 7px}
+.tag.flag{color:var(--warn);background:var(--warn-bg)}
+
+.detail{display:none;border-top:1px solid var(--line);padding:4px 14px 14px}
+.card.open .detail{display:block}
+h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);margin:14px 0 8px}
+.conf{background:var(--panel2);border-radius:10px;padding:10px 12px;font-size:13px}
+.conf b{font-size:16px}
+ul.why{list-style:none}
+ul.why li{padding:4px 0 4px 16px;position:relative;font-size:14px}
+ul.why li:before{content:"";position:absolute;left:2px;top:12px;width:6px;height:6px;border-radius:50%;background:var(--faint)}
+ul.why li.flag{color:var(--warn)}
+ul.why li.flag:before{background:var(--warn)}
+
+.news{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.news:last-child{border-bottom:none}
+.dot{flex:0 0 8px;height:8px;border-radius:50%;margin-top:7px;background:var(--faint)}
+.dot.pos{background:var(--up)}.dot.neg{background:var(--down)}
+.news a{color:var(--text);font-size:14px}
+.news small{display:block;color:var(--dim);font-size:12px;margin-top:2px}
+.kw{display:inline-block;font-size:11px;border-radius:4px;padding:0 5px;margin:3px 4px 0 0;background:var(--panel2);color:var(--dim)}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.stat{background:var(--panel2);border-radius:10px;padding:9px 11px}
+.stat small{display:block;color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.stat b{font-size:16px}
+.bar{height:6px;border-radius:3px;background:var(--down);margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--up)}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.links a{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:13px;color:var(--text)}
+.filing{font-size:13px;padding:3px 0}
+.filing .num{color:var(--dim);margin-right:8px}
+
+.bucket{display:grid;grid-template-columns:1fr auto;gap:4px 12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px}
+.bucket .rate{font-size:22px;font-weight:700;text-align:right}
+.bucket small{color:var(--dim);font-size:12px}
+.call{display:grid;grid-template-columns:60px 1fr auto auto;gap:10px;align-items:center;padding:9px 2px;border-bottom:1px solid var(--line);font-size:14px}
+.res{font-size:13px;text-align:right;min-width:62px}
+.empty{color:var(--dim);text-align:center;padding:40px 10px}
+.about p{margin-bottom:12px;color:var(--dim)}
+.about b{color:var(--text)}
+.disclaimer{font-size:12px;color:var(--faint);text-align:center;margin-top:24px}
+@media (min-width:600px){.grid{grid-template-columns:repeat(4,1fr)}.search{flex:1 1 200px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="logo">penny<span>scan</span></div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <div class="updated" id="updated">loading…</div>
+      <button class="refresh" onclick="load(true)" aria-label="Refresh">↻</button>
+    </div>
+  </div>
+  <nav>
+    <button data-view="signals" class="on">Signals</button>
+    <button data-view="track">Track record</button>
+    <button data-view="about">How it works</button>
+  </nav>
+</header>
+
+<main>
+  <section id="v-signals">
+    <div id="stale"></div>
+    <div class="summary" id="summary"></div>
+    <div class="controls" id="filters">
+      <button class="chip on" data-f="active">Signals</button>
+      <button class="chip" data-f="bull">Bullish</button>
+      <button class="chip" data-f="bear">Bearish</button>
+      <button class="chip" data-f="strong">Strong 7+</button>
+      <button class="chip" data-f="all">Everything scanned</button>
+      <input class="search" id="q" placeholder="Search ticker or company" autocomplete="off" autocapitalize="characters">
+    </div>
+    <div id="list"></div>
+  </section>
+  <section id="v-track" hidden></section>
+  <section id="v-about" hidden class="about">
+    <h3>What you're looking at</h3>
+    <p>Every 15 minutes on weekdays, the scanner pulls stocks under <b id="maxp">$5</b> that are trending on Reddit or showing up in Yahoo's small-cap gainers, most-active and most-shorted lists. It looks closely at the 40 getting the most unusual attention.</p>
+    <h3>Lean & strength</h3>
+    <p><b>Bullish / Bearish</b> is which way the evidence points. <b>Strength (1–10)</b> is how strong and clear that evidence is, boosted when volume or chatter is exploding.</p>
+    <p>Evidence used: <b>news headlines</b> (FDA approvals, contracts and buyouts score positive; offerings, reverse splits, bankruptcy and delisting score negative), <b>SEC filings</b> (S-1/S-3/424B mean the company is selling new shares = dilution), <b>price move & volume vs normal</b>, <b>Reddit mention growth</b>, <b>StockTwits bull/bear tags</b>, and <b>short interest</b> (squeeze fuel).</p>
+    <h3>Confidence = real track record</h3>
+    <p>The score is the scanner's opinion. The <b>hit rate</b> is whether that opinion has actually worked: every call is checked 1 and 5 trading days later. A hit means the stock moved at least <b id="thr">5%</b> the called way. Until a strength level has about 20 graded calls, it's marked <b>unproven</b>.</p>
+    <h3>Red flags</h3>
+    <p><b>Dilution filings</b>, <b>pump patterns</b> (huge move + hype with no news), <b>sub-$1 prices</b> (delisting risk), and a reminder that most penny stocks can't be shorted cheaply.</p>
+    <p class="disclaimer">Automated signals, not financial advice. Penny stocks are extremely volatile and many lose most of their value.</p>
+  </section>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let DATA = null, TRACK = null, filter = "active", query = "", openSet = new Set();
+
+function ago(ts){
+  const s = (Date.now() - (typeof ts === "number" ? ts*1000 : Date.parse(ts))) / 1000;
+  if (s < 90) return "just now";
+  if (s < 3600) return Math.round(s/60) + "m ago";
+  if (s < 86400) return Math.round(s/3600) + "h ago";
+  return Math.round(s/86400) + "d ago";
+}
+const pct = (x, d=1) => x == null ? "–" : (x > 0 ? "+" : "") + x.toFixed(d) + "%";
+const cls = x => x > 0 ? "up" : x < 0 ? "down" : "dim";
+function big(n){
+  if (n == null) return "–";
+  if (n >= 1e9) return (n/1e9).toFixed(2) + "B";
+  if (n >= 1e6) return (n/1e6).toFixed(1) + "M";
+  if (n >= 1e3) return (n/1e3).toFixed(0) + "K";
+  return String(Math.round(n));
+}
+const price = p => p == null ? "–" : "$" + (p < 1 ? p.toFixed(4).replace(/0+$/,"").replace(/\.$/,"") : p.toFixed(2));
+const DILUTION = /^(S-1|S-3|F-1|F-3|424B)/;
+
+async function load(manual){
+  const btn = document.querySelector(".refresh");
+  if (manual) btn.textContent = "…";
+  try {
+    const t = Date.now();
+    const [a, b] = await Promise.all([fetch("data/latest.json?t="+t), fetch("data/track.json?t="+t)]);
+    if (!a.ok) throw new Error("no data yet");
+    DATA = await a.json();
+    TRACK = b.ok ? await b.json() : null;
+    render();
+  } catch (e) {
+    $("#list").innerHTML = `<div class="empty">No scan data yet.<br>It appears after the first scan finishes (every 15 min on weekdays).</div>`;
+    $("#updated").textContent = "waiting for first scan";
+  }
+  btn.textContent = "↻";
+}
+
+function render(){
+  const g = DATA.generated_at;
+  $("#updated").innerHTML = `updated <b>${ago(g)}</b><br>${DATA.checked} stocks checked`;
+  $("#maxp").textContent = "$" + DATA.settings.max_price;
+  $("#thr").textContent = DATA.settings.win_threshold_pct + "%";
+
+  const ageMin = (Date.now() - Date.parse(g)) / 60000;
+  const d = new Date(), wd = d.getDay();
+  $("#stale").innerHTML = (ageMin > 60 && wd > 0 && wd < 6)
+    ? `<div class="stale">Last scan was ${ago(g)}. Scans run every 15 min, about 7am–5pm ET on weekdays; outside those hours this is the latest data.</div>` : "";
+
+  const sig = DATA.signals;
+  const bull = sig.filter(s => s.lean === "BULLISH" && s.strength >= 3).length;
+  const bear = sig.filter(s => s.lean === "BEARISH" && s.strength >= 3).length;
+  const strong = sig.filter(s => s.lean !== "NEUTRAL" && s.strength >= 7).length;
+  $("#summary").innerHTML = `
+    <div><b class="up num">${bull}</b><small>bullish (3+)</small></div>
+    <div><b class="down num">${bear}</b><small>bearish (3+)</small></div>
+    <div><b class="num">${strong}</b><small>strong 7+</small></div>`;
+  renderList();
+  renderTrack();
+}
+
+function visible(){
+  let s = DATA.signals;
+  if (filter === "active") s = s.filter(x => x.lean !== "NEUTRAL" && x.strength >= 3);
+  if (filter === "bull") s = s.filter(x => x.lean === "BULLISH");
+  if (filter === "bear") s = s.filter(x => x.lean === "BEARISH");
+  if (filter === "strong") s = s.filter(x => x.lean !== "NEUTRAL" && x.strength >= 7);
+  if (query) s = s.filter(x => x.ticker.includes(query) || (x.name||"").toUpperCase().includes(query));
+  return s;
+}
+
+function meter(n){ let h = ""; for (let i = 1; i <= 10; i++) h += `<i class="${i <= n ? "f" : ""}"></i>`; return `<div class="meter">${h}</div>`; }
+
+function card(s){
+  const tags = [];
+  tags.push(`<span class="tag num">vol ${s.rel_volume ? s.rel_volume.toFixed(1) : "–"}x</span>`);
+  if (s.news_count) tags.push(`<span class="tag">${s.news_count} news</span>`);
+  if (s.social && s.social.mentions) tags.push(`<span class="tag">Reddit ${s.social.mentions}</span>`);
+  if (s.stocktwits && s.stocktwits.bull + s.stocktwits.bear >= 5)
+    tags.push(`<span class="tag">ST ${Math.round(100*s.stocktwits.bull/(s.stocktwits.bull+s.stocktwits.bear))}% bull</span>`);
+  if (s.short_pct_float) tags.push(`<span class="tag">SI ${(s.short_pct_float*100).toFixed(0)}%</span>`);
+  if (s.red_flags.length) tags.push(`<span class="tag flag">⚠ ${s.red_flags.length} flag${s.red_flags.length>1?"s":""}</span>`);
+  const label = s.lean === "NEUTRAL" ? "NEUTRAL" : s.lean === "BULLISH" ? "BULL" : "BEAR";
+  return `<div class="card ${s.lean === "NEUTRAL" ? "neutral" : ""} ${openSet.has(s.ticker) ? "open" : ""}" data-t="${esc(s.ticker)}">
+    <div class="row">
+      <div><div class="tk">${esc(s.ticker)}</div><div class="nm">${esc(s.name)}</div></div>
+      <div class="px num"><b>${price(s.price)}</b><span class="${cls(s.chg_pct)}">${pct(s.chg_pct)}</span></div>
+      <div class="lean ${s.lean}"><b>${label}${s.lean !== "NEUTRAL" ? " " + s.strength : ""}</b>${s.lean !== "NEUTRAL" ? meter(s.strength) : ""}</div>
+    </div>
+    <div class="tags">${tags.join("")}</div>
+    <div class="detail">${openSet.has(s.ticker) ? detail(s) : ""}</div>
+  </div>`;
+}
+
+function confBox(s){
+  if (s.lean === "NEUTRAL") return `<div class="conf dim">No clear lean: evidence is mixed or weak.</div>`;
+  const c = s.confidence || {};
+  if (!c.proven) return `<div class="conf"><b class="warn">Unproven</b><br><span class="dim">Only ${c.n1||0} graded ${s.lean.toLowerCase()} calls at this strength so far. Needs ~${DATA.settings.min_samples} before the hit rate means much.</span></div>`;
+  const r5 = c.rate5 != null && c.n5 ? ` · <b>${Math.round(c.rate5*100)}%</b> after 5 days (${c.n5})` : "";
+  return `<div class="conf">Past ${s.lean.toLowerCase()} calls at this strength: <b>${Math.round(c.rate1*100)}%</b> hit next day (${c.n1} calls)${r5}</div>`;
+}
+
+function detail(s){
+  let h = `<h3>Confidence</h3>${confBox(s)}`;
+  const reasons = s.reasons.filter(r => !r.startsWith("News"));
+  if (reasons.length || s.red_flags.length)
+    h += `<h3>Why</h3><ul class="why">${reasons.map(r => `<li>${esc(r)}</li>`).join("")}${s.red_flags.map(f => `<li class="flag">${esc(f)}</li>`).join("")}</ul>`;
+
+  h += `<h3>News (last 24h)</h3>`;
+  h += s.news && s.news.length ? s.news.map(n => {
+    const c = n.score > 0.1 ? "pos" : n.score < -0.1 ? "neg" : "";
+    const kws = (n.hits||[]).map(k => `<span class="kw">${esc(k)}</span>`).join("");
+    const title = n.url ? `<a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a>` : `<span>${esc(n.title)}</span>`;
+    return `<div class="news"><div class="dot ${c}"></div><div>${title}<small>${esc(n.source)} · ${ago(n.ts)} · <span class="${cls(n.score)}">${n.score > 0 ? "+" : ""}${n.score.toFixed(2)}</span></small>${kws}</div></div>`;
+  }).join("") : `<div class="dim" style="font-size:14px">No news found. If it's moving, ask why.</div>`;
+
+  const st = s.stocktwits, so = s.social;
+  h += `<h3>Numbers</h3><div class="grid">
+    <div class="stat"><small>Volume vs normal</small><b class="num">${s.rel_volume ? s.rel_volume.toFixed(1) + "x" : "–"}</b><div class="dim num" style="font-size:12px">${big(s.volume)} / avg ${big(s.avg_volume)}</div></div>
+    <div class="stat"><small>Short interest</small><b class="num ${s.short_pct_float >= .2 ? "warn" : ""}">${s.short_pct_float ? (s.short_pct_float*100).toFixed(1) + "%" : "–"}</b><div class="dim" style="font-size:12px">of float</div></div>
+    <div class="stat"><small>Float</small><b class="num">${big(s.float_shares)}</b><div class="dim" style="font-size:12px">shares</div></div>
+    <div class="stat"><small>Market cap</small><b class="num">${s.market_cap ? "$" + big(s.market_cap) : "–"}</b></div>`;
+  if (so) {
+    const g = so.mentions_24h_ago ? ((so.mentions / so.mentions_24h_ago - 1) * 100) : null;
+    h += `<div class="stat"><small>Reddit mentions</small><b class="num">${so.mentions}</b><div class="${cls(g)} num" style="font-size:12px">${g == null ? "new" : pct(g, 0)} vs 24h ago</div></div>`;
+  }
+  if (st && st.bull + st.bear > 0) {
+    const p = Math.round(100 * st.bull / (st.bull + st.bear));
+    h += `<div class="stat"><small>StockTwits</small><b class="num">${p}% bull</b><div class="bar"><i style="width:${p}%"></i></div><div class="dim" style="font-size:12px">${st.bull + st.bear} tagged posts</div></div>`;
+  }
+  h += `</div>`;
+
+  if (s.filings && s.filings.length)
+    h += `<h3>Recent SEC filings</h3>` + s.filings.map(f =>
+      `<div class="filing"><span class="num">${esc(f.date)}</span><b class="${DILUTION.test(f.form) ? "warn" : ""}">${esc(f.form)}</b>${DILUTION.test(f.form) ? ' <span class="warn">· dilution</span>' : ""}</div>`).join("");
+
+  const t = encodeURIComponent(s.ticker);
+  h += `<div class="links">
+    <a href="https://finance.yahoo.com/quote/${t}" target="_blank" rel="noopener">Chart</a>
+    <a href="https://stocktwits.com/symbol/${t}" target="_blank" rel="noopener">StockTwits</a>
+    <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${t}&type=&dateb=&owner=include&count=40" target="_blank" rel="noopener">SEC filings</a>
+    <a href="https://www.reddit.com/search/?q=%24${t}&sort=new" target="_blank" rel="noopener">Reddit</a>
+  </div>`;
+  return h;
+}
+
+function renderList(){
+  const s = visible();
+  $("#list").innerHTML = s.length ? s.map(card).join("") : `<div class="empty">Nothing matches right now.</div>`;
+}
+
+function renderTrack(){
+  const el = $("#v-track");
+  if (!TRACK) { el.innerHTML = `<div class="empty">No track record yet.</div>`; return; }
+  const thr = TRACK.win_threshold_pct;
+  let h = `<h3>How often each kind of call worked</h3><p class="dim" style="font-size:13px;margin-bottom:10px">A hit = the stock moved ${thr}%+ in the called direction. Small samples are mostly luck; trust a row only once it has ~20+ calls.</p>`;
+  for (const b of TRACK.buckets) {
+    if (b.hi < 4) continue; // calls below 4 are not logged
+    const r1 = b.n1 ? Math.round(100*b.hits1/b.n1) : null;
+    const r5 = b.n5 ? Math.round(100*b.hits5/b.n5) : null;
+    const col = b.lean === "BULLISH" ? "up" : "down";
+    h += `<div class="bucket">
+      <div><b class="${col}">${b.lean === "BULLISH" ? "Bullish" : "Bearish"} ${b.lo}–${b.hi}</b><br>
+        <small>${b.n1} graded · avg next day <span class="${cls(b.avg1)}">${pct(b.avg1)}</span> · 5-day <span class="${cls(b.avg5)}">${pct(b.avg5)}</span></small></div>
+      <div class="rate num ${r1 == null ? "dim" : ""}">${r1 == null ? "–" : r1 + "%"}<br><small>${r5 == null ? "" : "5d: " + r5 + "%"}</small></div>
+    </div>`;
+  }
+  h += `<h3>Recent calls</h3>`;
+  h += TRACK.recent.length ? TRACK.recent.map(c => {
+    const r = c.ret_5d ?? c.ret_1d;
+    const hit = c.ret_5d != null ? c.hit_5d : c.hit_1d;
+    const res = r == null ? `<span class="dim">pending</span>` :
+      `<span class="${hit ? "up" : "down"}">${hit ? "✓" : "✗"}</span> <span class="num ${cls(r)}">${pct(r)}</span>`;
+    return `<div class="call"><b>${esc(c.ticker)}</b><span class="dim" style="font-size:13px">${c.day} · ${price(c.price)}</span>
+      <span class="lean ${c.lean}" style="min-width:0;padding:2px 8px;font-size:12px">${c.lean === "BULLISH" ? "BULL" : "BEAR"} ${c.strength}</span><span class="res">${res}</span></div>`;
+  }).join("") : `<div class="empty">Calls show up here as they're made, then get graded over the next trading days.</div>`;
+  el.innerHTML = h;
+}
+
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("on", x === b));
+  for (const v of ["signals","track","about"]) $("#v-" + v).hidden = v !== b.dataset.view;
+  scrollTo(0, 0);
+});
+$("#filters").addEventListener("click", e => {
+  const f = e.target.dataset.f; if (!f) return;
+  filter = f;
+  document.querySelectorAll("#filters .chip").forEach(c => c.classList.toggle("on", c.dataset.f === f));
+  renderList();
+});
+$("#q").addEventListener("input", e => { query = e.target.value.trim().toUpperCase(); renderList(); });
+$("#list").addEventListener("click", e => {
+  if (e.target.closest("a")) return;
+  const c = e.target.closest(".card"); if (!c || !e.target.closest(".row, .tags")) return;
+  const t = c.dataset.t;
+  openSet.has(t) ? openSet.delete(t) : openSet.add(t);
+  const s = DATA.signals.find(x => x.ticker === t);
+  c.classList.toggle("open");
+  c.querySelector(".detail").innerHTML = openSet.has(t) ? detail(s) : "";
+});
+
+load();
+setInterval(load, 5 * 60 * 1000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) load(); });
+</script>
+</body>
+</html>

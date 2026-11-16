@@ -14,10 +14,10 @@ BULLISH = {
     "fda approval": 0.9, "fda approves": 0.9, "fda clearance": 0.7, "approval": 0.5,
     "breakthrough therapy": 0.6, "fast track": 0.4, "positive topline": 0.7,
     "positive results": 0.6, "met primary endpoint": 0.7, "strategic partnership": 0.5,
-    "partnership": 0.4, "collaboration": 0.3, "awarded": 0.5, "contract": 0.4,
+    "partnership*": 0.4, "collaboration": 0.3, "awarded": 0.5, "contract": 0.4, "contracts": 0.4,
     "purchase order": 0.4, "definitive agreement": 0.5, "to be acquired": 0.7,
     "acquisition": 0.3, "merger": 0.3, "record revenue": 0.6, "beats": 0.4,
-    "raises guidance": 0.6, "profitable": 0.4, "uplist": 0.5, "patent": 0.3,
+    "raises guidance": 0.6, "profitable": 0.4, "uplist*": 0.5, "patent*": 0.3,
     "share repurchase": 0.5, "buyback": 0.5, "expansion": 0.3, "expands": 0.3,
     "launch": 0.2, "regains compliance": 0.5, "insider buying": 0.5,
     "insider purchase": 0.5, "eliminates debt": 0.5, "short squeeze": 0.3,
@@ -26,18 +26,21 @@ BULLISH = {
 BEARISH = {
     "public offering": -0.8, "registered direct": -0.8, "private placement": -0.6,
     "at-the-market": -0.6, "announces pricing": -0.6, "pricing of": -0.5,
-    "dilution": -0.5, "warrant": -0.3, "reverse stock split": -0.7,
-    "reverse split": -0.7, "delist": -0.7, "deficiency": -0.5, "non-compliance": -0.5,
+    "dilution": -0.5, "warrant*": -0.3, "reverse stock split": -0.7,
+    "reverse split": -0.7, "delist*": -0.7, "deficiency": -0.5, "non-compliance": -0.5,
     "noncompliance": -0.5, "bankruptcy": -0.9, "chapter 11": -0.9,
-    "going concern": -0.7, "misses": -0.4, "class action": -0.4, "lawsuit": -0.3,
-    "investigation": -0.4, "sec charges": -0.8, "halted": -0.3, "resign": -0.3,
-    "downgrade": -0.4, "default": -0.5, "recall": -0.4, "terminat": -0.4,
+    "going concern": -0.7, "misses": -0.4, "class action": -0.4, "lawsuit*": -0.3,
+    "investigation": -0.4, "sec charges": -0.8, "halted": -0.3, "resign*": -0.3,
+    "downgrade": -0.4, "default": -0.5, "recall*": -0.4, "terminat*": -0.4,
     "complete response letter": -0.8, "failed to meet": -0.6, "did not meet": -0.6,
 }
 
 # Longest phrases first so "fda approval" wins over "approval".
 _RULES = sorted(list(BULLISH.items()) + list(BEARISH.items()), key=lambda kv: -len(kv[0]))
-_PATTERNS = [(re.compile(r"\b" + re.escape(p)), p, w) for p, w in _RULES]
+# Whole words only ("investigation" must not match "investigational"),
+# except stems marked with * ("delist*" matches delisted / delisting).
+_PATTERNS = [(re.compile(r"\b" + re.escape(p.rstrip("*")) + ("" if p.endswith("*") else r"\b")),
+              p.rstrip("*"), w) for p, w in _RULES]
 
 
 def score_text(text):
