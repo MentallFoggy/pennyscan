@@ -1,47 +1,53 @@
 # Penny stock scanner
-_Last scan: Mon Nov 16, 02:48 PM ET · 40 stocks checked · 3 calls logged so far_
+_Last scan: Mon Nov 16, 03:03 PM ET · 40 stocks checked · 4 calls logged so far_
 
 ## Current signals
 
 | Ticker | Lean | Strength | Price | Today | Volume |
 |---|---|---|---|---|---|
-| **LXEO** | BULLISH | 9/10 | $3.28 | +14.3% | 35.3x |
-| **AKAN** | BULLISH | 7/10 | $2.17 | +59.9% | 24.0x |
+| **LXEO** | BULLISH | 9/10 | $3.27 | +13.9% | 34.3x |
+| **AKAN** | BULLISH | 7/10 | $2.12 | +56.2% | 23.2x |
+| **FGL** | BULLISH | 5/10 | $1.03 | +7.3% | 13.2x |
 | **PLCE** | BEARISH | 5/10 | $0.29 | -34.1% | 1.4x |
 | **OPTU** | BULLISH | 2/10 | $0.62 | +18.0% | 1.3x |
-| **SJT** | BULLISH | 2/10 | $4.46 | +12.6% | 1.7x |
-| **EU** | BULLISH | 2/10 | $0.50 | -9.5% | 1.3x |
-| **FF** | BULLISH | 2/10 | $3.19 | +10.0% | 1.7x |
-| **XTND** | BULLISH | 2/10 | $1.57 | +13.1% | 0.9x |
-| **OPEN** | BULLISH | 2/10 | $1.14 | -4.1% | 1.1x |
-| **HTZ** | BULLISH | 2/10 | $1.41 | -6.0% | 0.8x |
-| **CAN** | BEARISH | 1/10 | $0.14 | -11.5% | 1.7x |
+| **SJT** | BULLISH | 2/10 | $4.46 | +12.6% | 1.8x |
+| **EU** | BULLISH | 2/10 | $0.50 | -9.7% | 1.3x |
+| **FF** | BULLISH | 2/10 | $3.18 | +9.8% | 1.7x |
+| **XTND** | BULLISH | 2/10 | $1.60 | +15.1% | 0.9x |
+| **OPEN** | BULLISH | 2/10 | $1.14 | -4.2% | 1.1x |
+| **HTZ** | BULLISH | 2/10 | $1.41 | -6.0% | 0.7x |
+| **CAN** | BEARISH | 1/10 | $0.14 | -11.5% | 1.6x |
 | **MPT** | BULLISH | 1/10 | $1.54 | -7.5% | 1.7x |
-| **BYND** | BEARISH | 1/10 | $4.94 | -8.2% | 1.5x |
-| **EDIT** | BULLISH | 1/10 | $1.89 | -12.7% | 0.7x |
+| **BYND** | BEARISH | 1/10 | $4.99 | -7.2% | 1.6x |
 | **ENVX** | BULLISH | 1/10 | $1.48 | -7.8% | 1.3x |
-| **BAK** | BEARISH | 1/10 | $0.95 | -15.7% | 0.4x |
-| **VNET** | BULLISH | 1/10 | $2.63 | -11.6% | 0.7x |
-| **LCID** | BEARISH | 1/10 | $2.71 | -8.1% | 1.0x |
-| **RXRX** | BULLISH | 1/10 | $2.90 | -8.8% | 1.0x |
-| **UAMY** | BEARISH | 1/10 | $2.79 | -9.9% | 0.8x |
-| **SOUN** | BULLISH | 1/10 | $3.24 | -7.0% | 1.0x |
-| **SERV** | BULLISH | 1/10 | $2.53 | -3.6% | 1.2x |
+| **EDIT** | BULLISH | 1/10 | $1.91 | -12.1% | 0.7x |
+| **BAK** | BEARISH | 1/10 | $0.96 | -15.1% | 0.4x |
+| **VNET** | BULLISH | 1/10 | $2.64 | -11.2% | 0.7x |
+| **RXRX** | BULLISH | 1/10 | $2.90 | -8.8% | 0.9x |
+| **UAMY** | BEARISH | 1/10 | $2.78 | -10.0% | 0.7x |
+| **SOUN** | BULLISH | 1/10 | $3.24 | -7.2% | 1.0x |
 
 ### LXEO · BULLISH 9/10
 - News +: Lexeo Therapeutics shares surge 25% on interim data for LX2020 gene therapy [approval]
 - News +: Lexeo Therapeutics Reports LX2020 Gene Therapy Trial Data and Outlines Potential FDA Accelerated Approval Path [investigation, approval]
 - Up 14% today
-- Volume 35.3x normal
+- Volume 34.3x normal
 - StockTwits 100% bullish (14 tagged posts)
 - Short interest 24% of float (squeeze fuel)
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ### AKAN · BULLISH 7/10
 - News +: BC-Most Active Stocks
-- Up 60% today
-- Volume 24.0x normal
-- StockTwits 100% bullish (17 tagged posts)
+- Up 56% today
+- Volume 23.2x normal
+- StockTwits 100% bullish (16 tagged posts)
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### FGL · BULLISH 5/10
+- Up 7% today
+- Volume 13.2x normal
+- StockTwits 100% bullish (21 tagged posts)
+- Short interest 39% of float (squeeze fuel)
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ### PLCE · BEARISH 5/10
@@ -67,7 +73,7 @@ _Last scan: Mon Nov 16, 02:48 PM ET · 40 stocks checked · 3 calls logged so fa
 
 ### EU · BULLISH 2/10
 - News +: enCore Energy (EU) Stock Sees Fair Value Falls As Analysts Cut Targets On Production Reset
-- Down 9% today
+- Down 10% today
 - Reddit mentions 13 (24h ago: 15)
 - StockTwits 94% bullish (16 tagged posts)
 - ⚠️ Under $1: delisting risk, wide spreads
@@ -79,18 +85,18 @@ _Last scan: Mon Nov 16, 02:48 PM ET · 40 stocks checked · 3 calls logged so fa
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ### XTND · BULLISH 2/10
-- Up 13% today
+- Up 15% today
 - StockTwits 94% bullish (17 tagged posts)
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ### OPEN · BULLISH 2/10
-- StockTwits 80% bullish (15 tagged posts)
+- StockTwits 81% bullish (16 tagged posts)
 - Short interest 28% of float (squeeze fuel)
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ### HTZ · BULLISH 2/10
 - Down 6% today
-- StockTwits 94% bullish (16 tagged posts)
+- StockTwits 100% bullish (15 tagged posts)
 - Short interest 72% of float (squeeze fuel)
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
@@ -109,15 +115,9 @@ _Last scan: Mon Nov 16, 02:48 PM ET · 40 stocks checked · 3 calls logged so fa
 
 ### BYND · BEARISH 1/10
 - News ~: Target names food industry executive as a director
-- Down 8% today
-- StockTwits 28% bullish (18 tagged posts)
+- Down 7% today
+- StockTwits 21% bullish (19 tagged posts)
 - Short interest 35% of float (squeeze fuel)
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### EDIT · BULLISH 1/10
-- Down 13% today
-- StockTwits 100% bullish (11 tagged posts)
-- Short interest 25% of float (squeeze fuel)
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ### ENVX · BULLISH 1/10
