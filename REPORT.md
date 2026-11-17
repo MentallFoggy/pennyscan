@@ -1,161 +1,155 @@
 # Penny stock scanner
-_Last scan: Mon Nov 16, 10:06 PM ET · 40 stocks checked · 11 calls logged so far_
+_Last scan: Tue Nov 17, 01:20 PM ET · 40 stocks checked · 16 calls logged so far_
 
 ## Current signals
 
 | Ticker | Lean | Strength | Price | Today | Volume |
 |---|---|---|---|---|---|
-| **SPCE** | BEARISH | 6/10 | $1.57 | -14.7% | 3.1x |
-| **TE** | BEARISH | 5/10 | $1.50 | -21.4% | 1.6x |
-| **FFAI** | BEARISH | 4/10 | $0.19 | +1.9% | 7.8x |
-| **RCAT** | BEARISH | 4/10 | $2.61 | -31.4% | 1.6x |
-| **DDD** | BEARISH | 4/10 | $1.42 | -7.3% | 2.6x |
-| **GPUS** | BEARISH | 4/10 | $0.16 | -8.0% | 0.3x |
-| **FGL** | BULLISH | 3/10 | $0.92 | -4.4% | 17.7x |
-| **NMAD** | BULLISH | 3/10 | $2.76 | +17.4% | 2.0x |
-| **GLAS** | BULLISH | 3/10 | $1.70 | +33.9% | 1.7x |
-| **PSFE** | BEARISH | 3/10 | $3.13 | -22.0% | 2.9x |
-| **LAB** | BEARISH | 3/10 | $0.62 | -12.5% | 0.8x |
-| **ARAI** | BEARISH | 3/10 | $1.97 | -12.4% | 0.3x |
-| **DFDV** | BEARISH | 2/10 | $2.76 | -9.1% | 1.6x |
-| **VANI** | BULLISH | 2/10 | $1.02 | +1.0% | 1.8x |
-| **SJT** | BULLISH | 2/10 | $4.36 | +10.1% | 2.2x |
-| **SIDU** | BULLISH | 2/10 | $0.90 | -4.3% | 0.7x |
-| **VIVK** | BULLISH | 1/10 | $0.28 | +33.1% | 4.4x |
-| **BAER** | BEARISH | 1/10 | $0.16 | -37.5% | 1.4x |
-| **OPTU** | BEARISH | 1/10 | $0.63 | +20.4% | 1.5x |
-| **CABO** | BULLISH | 1/10 | $2.89 | -3.7% | 0.7x |
+| **TE** | BEARISH | 7/10 | $1.27 | -14.4% | 1.6x |
+| **SPCE** | BEARISH | 6/10 | $1.36 | -13.1% | 6.7x |
+| **MAIA** | BULLISH | 5/10 | $1.24 | +22.3% | 13.1x |
+| **CLRO** | BULLISH | 5/10 | $4.62 | -3.3% | 0.2x |
+| **GLAS** | BULLISH | 4/10 | $1.62 | +25.7% | 6.4x |
+| **GP** | BULLISH | 3/10 | $2.52 | +78.6% | 18.8x |
+| **GIPR** | BULLISH | 3/10 | $0.25 | -2.4% | 8.2x |
+| **RCAT** | BEARISH | 3/10 | $2.37 | -33.0% | 5.8x |
+| **TROX** | BEARISH | 3/10 | $1.90 | -21.5% | 5.3x |
+| **MIST** | BULLISH | 3/10 | $0.43 | +17.8% | 3.3x |
+| **LOT** | BULLISH | 2/10 | $0.21 | +0.5% | 15.0x |
+| **CANG** | BULLISH | 2/10 | $1.62 | +10.2% | 5.8x |
+| **NFE** | BULLISH | 2/10 | $3.66 | +20.0% | 2.1x |
+| **NLST** | BULLISH | 2/10 | $4.71 | +4.4% | 1.6x |
+| **EMAT** | BULLISH | 2/10 | $0.71 | +2.5% | 1.7x |
+| **AMST** | BULLISH | 2/10 | $0.59 | +8.3% | 1.1x |
+| **EMPD** | BULLISH | 2/10 | $2.03 | +8.9% | 2.6x |
+| **QNME** | BEARISH | 2/10 | $0.30 | -5.5% | 0.3x |
+| **AIMD** | BULLISH | 2/10 | $1.20 | +5.3% | 0.3x |
+| **CRMT** | BULLISH | 2/10 | $0.96 | +3.0% | 0.1x |
+| **CAST** | BULLISH | 1/10 | $1.06 | +1.9% | 0.9x |
+| **SOUN** | BULLISH | 1/10 | $3.08 | -4.6% | 2.0x |
+| **EDSA** | BULLISH | 1/10 | $1.95 | +3.2% | 0.1x |
 
-### SPCE · BEARISH 6/10
-- New 8-K filed 2026-11-13 (material event)
-- Down 15% today
-- Volume 3.1x normal
-- StockTwits 50% bullish (16 tagged posts)
-- Short interest 27% of float (squeeze fuel)
-- ⚠️ Dilution filing(s) in last 30d: 424B5
-- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### TE · BEARISH 5/10
+### TE · BEARISH 7/10
 - New 8-K filed 2026-11-16 (material event)
-- Down 21% today
-- StockTwits 64% bullish (11 tagged posts)
+- Down 14% today
+- StockTwits 62% bullish (8 tagged posts)
 - Short interest 35% of float (squeeze fuel)
 - ⚠️ Dilution filing(s) in last 30d: 424B5, 424B7
 - ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+- _Track record at this strength: not enough data yet (1 graded calls). Treat as unproven._
 
-### FFAI · BEARISH 4/10
-- 8-K just filed with the SEC (304m ago)
-- New 8-K filed 2026-11-16 (material event)
-- Volume 7.8x normal
-- StockTwits 79% bullish (19 tagged posts)
-- Short interest 50% of float (squeeze fuel)
-- Volume today = 3.3x the entire float
-- Low float: 3.8M shares (moves fast both ways)
-- ⚠️ Dilution filing(s) in last 30d: S-3/A
-- ⚠️ Under $1: delisting risk, wide spreads
+### SPCE · BEARISH 6/10
+- New 8-K filed 2026-11-13 (material event)
+- Down 13% today
+- Volume 6.7x normal
+- StockTwits 75% bullish (12 tagged posts)
+- Short interest 27% of float (squeeze fuel)
+- ⚠️ Dilution filing(s) in last 30d: 424B5
 - ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
+- _Track record at this strength: not enough data yet (6 graded calls). Treat as unproven._
+
+### MAIA · BULLISH 5/10
+- 8-K just filed with the SEC (259m ago)
+- New 8-K filed 2026-11-17 (material event)
+- Up 22% today
+- Volume 13.1x normal
+- StockTwits 100% bullish (9 tagged posts)
+- _Track record at this strength: not enough data yet (1 graded calls). Treat as unproven._
+
+### CLRO · BULLISH 5/10
+- 8-K just filed with the SEC (17m ago)
+- New 8-K filed 2026-11-17 (material event)
+- StockTwits 100% bullish (14 tagged posts)
+- Short interest 38% of float (squeeze fuel)
+- Volume today = 1.1x the entire float
+- Low float: 0.9M shares (moves fast both ways)
+- _Track record at this strength: not enough data yet (1 graded calls). Treat as unproven._
+
+### GLAS · BULLISH 4/10
+- Up 26% today
+- Volume 6.4x normal
+- StockTwits 100% bullish (9 tagged posts)
+- _Track record at this strength: not enough data yet (1 graded calls). Treat as unproven._
+
+### GP · BULLISH 3/10
+- Up 79% today
+- Volume 18.8x normal
+- StockTwits 100% bullish (14 tagged posts)
+- ⚠️ Huge move + hype with no news: classic pump pattern
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
-### RCAT · BEARISH 4/10
-- News -: What Red Cat (RCAT) Said on Its Q3 Earnings Call [earnings/guidance]
-- News -: Red Cat Holdings, Inc. (RCAT) Reports Q3 Loss, Lags Revenue Estimates [earnings/guidance]
+### GIPR · BULLISH 3/10
+- 8-K just filed with the SEC (284m ago)
+- New 8-K filed 2026-11-17 (material event)
+- Volume 8.2x normal
+- StockTwits 92% bullish (24 tagged posts)
+- Volume today = 18.9x the entire float
+- Low float: 1.6M shares (moves fast both ways)
+- ⚠️ Under $1: delisting risk, wide spreads
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### RCAT · BEARISH 3/10
+- News +: RCAT Stock Heads For Worst Day In Over 5 Years – Analyst Positive About Redcat’s Prospects In 2027 [contracts]
+- News +: Can Draganfly's Canadian Defense Selection Drive Its Growth Prospects?
 - New 8-K filed 2026-11-16 (material event)
-- Down 31% today
-- Reddit mentions 15 (24h ago: 0)
-- StockTwits 8% bullish (13 tagged posts)
+- Down 33% today
+- Volume 5.8x normal
+- Reddit mentions 24 (24h ago: 1)
+- StockTwits 44% bullish (9 tagged posts)
 - Short interest 28% of float (squeeze fuel)
 - ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
-### DDD · BEARISH 4/10
+### TROX · BEARISH 3/10
+- New 8-K filed 2026-11-05 (material event)
+- Down 21% today
+- Volume 5.3x normal
+- StockTwits 12% bullish (8 tagged posts)
+- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### MIST · BULLISH 3/10
+- News ~: Milestone Pharmaceuticals (MIST) Stock Sees Fair Value Cut As Cardamyst Launch Concerns Persist [analyst/price target]
 - New 8-K filed 2026-11-13 (material event)
-- Down 7% today
-- Volume 2.6x normal
-- StockTwits 73% bullish (15 tagged posts)
-- Short interest 26% of float (squeeze fuel)
-- ⚠️ Dilution filing(s) in last 30d: 424B5
-- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### GPUS · BEARISH 4/10
-- News +: Hyperscale Data Reports Preliminary Q3 Revenue Growth of 84% to $44.8 Million [earnings/guidance]
-- 8-K just filed with the SEC (335m ago)
-- New 8-K filed 2026-11-16 (material event)
-- Down 8% today
-- StockTwits 50% bullish (8 tagged posts)
-- ⚠️ Dilution filing(s) in last 30d: 424B5
-- ⚠️ Under $1: delisting risk, wide spreads
-- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### FGL · BULLISH 3/10
-- Volume 17.7x normal
-- StockTwits 92% bullish (13 tagged posts)
-- Short interest 39% of float (squeeze fuel)
+- Up 18% today
+- Volume 3.3x normal
+- StockTwits 100% bullish (9 tagged posts)
 - ⚠️ Under $1: delisting risk, wide spreads
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
-### NMAD · BULLISH 3/10
-- 8-K just filed with the SEC (283m ago)
-- New 8-K filed 2026-11-16 (material event)
-- Up 17% today
-- Volume 2.0x normal
-- StockTwits 95% bullish (22 tagged posts)
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### GLAS · BULLISH 3/10
-- Up 34% today
-- StockTwits 100% bullish (15 tagged posts)
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### PSFE · BEARISH 3/10
-- Down 22% today
-- Volume 2.9x normal
-- StockTwits 0% bullish (9 tagged posts)
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### LAB · BEARISH 3/10
-- 8-K just filed with the SEC (338m ago)
-- New 8-K filed 2026-11-16 (material event)
-- Down 13% today
+### LOT · BULLISH 2/10
+- Volume 15.0x normal
 - StockTwits 100% bullish (14 tagged posts)
-- ⚠️ Dilution filing(s) in last 30d: 424B3
+- Low float: 8.2M shares (moves fast both ways)
 - ⚠️ Under $1: delisting risk, wide spreads
-- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
-### ARAI · BEARISH 3/10
-- 8-K just filed with the SEC (320m ago)
-- New 8-K filed 2026-11-16 (material event)
-- Down 12% today
-- StockTwits 80% bullish (15 tagged posts)
-- Low float: 0.8M shares (moves fast both ways)
-- ⚠️ Dilution filing(s) in last 30d: 424B3, S-3
-- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### DFDV · BEARISH 2/10
-- 8-K just filed with the SEC (338m ago)
-- New 8-K filed 2026-11-16 (material event)
-- Down 9% today
-- StockTwits 15% bullish (13 tagged posts)
-- Short interest 22% of float (squeeze fuel)
-- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### VANI · BULLISH 2/10
-- 8-K just filed with the SEC (335m ago)
-- New 8-K filed 2026-11-16 (material event)
-- StockTwits 100% bullish (13 tagged posts)
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### SJT · BULLISH 2/10
-- New 8-K filed 2026-10-20 (material event)
+### CANG · BULLISH 2/10
 - Up 10% today
-- Volume 2.2x normal
-- StockTwits 69% bullish (16 tagged posts)
+- Volume 5.8x normal
+- StockTwits 67% bullish (9 tagged posts)
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### NFE · BULLISH 2/10
+- New 8-K filed 2026-11-16 (material event)
+- Up 20% today
+- Volume 2.1x normal
+- StockTwits 62% bullish (8 tagged posts)
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### NLST · BULLISH 2/10
+- News ~: Netlist Explores New Opportunities in AI Memory Infrastructure [product/business update]
+- 8-K just filed with the SEC (319m ago)
+- New 8-K filed 2026-11-17 (material event)
+- StockTwits 100% bullish (19 tagged posts)
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### EMAT · BULLISH 2/10
+- News ~: Evolution Metals & Technologies Refutes 'Material Falsehoods' in Capybara Report; Shares Rise [legal/regulatory]
+- 8-K just filed with the SEC (289m ago)
+- New 8-K filed 2026-11-17 (material event)
+- StockTwits 100% bullish (16 tagged posts)
+- ⚠️ Under $1: delisting risk, wide spreads
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ## Track record (does it actually work?)
@@ -165,12 +159,12 @@ A **hit** = price moved at least 5% in the called direction. Graded from the pri
 | Lean | Strength | Next-day hits | Avg next-day move | 5-day hits | Avg 5-day move |
 |---|---|---|---|---|---|
 | BULLISH | 1-3 | - | - | - | - |
-| BULLISH | 4-6 | - | - | - | - |
-| BULLISH | 7-8 | - | - | - | - |
-| BULLISH | 9-10 | - | - | - | - |
+| BULLISH | 4-6 | 0/1 (0%) | -28.6% | - | - |
+| BULLISH | 7-8 | 0/1 (0%) | -18.8% | - | - |
+| BULLISH | 9-10 | 0/1 (0%) | -6.6% | - | - |
 | BEARISH | 1-3 | - | - | - | - |
-| BEARISH | 4-6 | - | - | - | - |
-| BEARISH | 7-8 | - | - | - | - |
+| BEARISH | 4-6 | 4/6 (67%) | -8.6% | - | - |
+| BEARISH | 7-8 | 0/1 (0%) | -0.7% | - | - |
 | BEARISH | 9-10 | - | - | - | - |
 
 > Rough guide: under ~20 calls in a row, the numbers are mostly noise. A bucket is only worth trusting if it beats 50% hits **and** the average move points the right way over many calls.
