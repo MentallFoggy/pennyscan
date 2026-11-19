@@ -1,163 +1,168 @@
 # Penny stock scanner
-_Last scan: Wed Nov 18, 12:55 PM ET · 40 stocks checked · 30 calls logged so far_
+_Last scan: Wed Nov 18, 07:04 PM ET · 40 stocks checked · 32 calls logged so far_
 
 ## Current signals
 
 | Ticker | Lean | Strength | Price | Today | Volume |
 |---|---|---|---|---|---|
-| **SPCE** | BEARISH | 6/10 | $1.25 | -3.5% | 3.2x |
-| **TROX** | BEARISH | 4/10 | $1.30 | -32.0% | 13.5x |
-| **ANGX** | BULLISH | 4/10 | $4.38 | +5.7% | 4.0x |
+| **CUE** | BULLISH | 6/10 | $4.92 | +73.9% | 37.1x |
+| **SPCE** | BEARISH | 6/10 | $1.20 | -7.7% | 3.1x |
+| **IMDX** | BEARISH | 4/10 | $1.59 | -10.7% | 3.1x |
 | **PLCE** | BULLISH | 4/10 | $0.38 | +40.7% | 0.1x |
-| **OPEN** | BULLISH | 4/10 | $1.36 | +14.8% | 1.6x |
-| **NRXP** | BULLISH | 4/10 | $2.82 | +15.1% | 1.2x |
-| **JRVR** | BULLISH | 3/10 | $3.13 | +3.8% | 6.6x |
-| **MEDS** | BEARISH | 3/10 | $0.71 | +11.0% | 5.6x |
-| **GP** | BULLISH | 3/10 | $2.55 | -2.7% | 1.6x |
-| **WHLR** | BEARISH | 3/10 | $0.41 | -6.3% | 0.1x |
-| **AKAN** | BEARISH | 2/10 | $3.63 | +77.1% | 11.8x |
-| **QTRX** | BEARISH | 2/10 | $2.21 | -22.7% | 9.4x |
-| **QSI** | BULLISH | 2/10 | $1.12 | +10.9% | 2.1x |
-| **CD** | BULLISH | 2/10 | $4.02 | +9.8% | 1.3x |
-| **NFE** | BULLISH | 2/10 | $4.49 | +19.0% | 1.5x |
-| **LAES** | BULLISH | 2/10 | $1.22 | +12.5% | 1.5x |
-| **DSX** | BULLISH | 2/10 | $2.26 | -1.1% | 2.6x |
-| **NXDT** | BULLISH | 2/10 | $3.29 | +15.4% | 1.1x |
-| **EVTL** | BULLISH | 2/10 | $0.31 | +5.7% | 2.0x |
-| **OWLT** | BULLISH | 1/10 | $3.77 | +16.0% | 2.3x |
-| **SID** | BULLISH | 1/10 | $0.61 | -3.5% | 3.4x |
-| **NPWR** | BULLISH | 1/10 | $0.97 | +15.0% | 1.4x |
-| **CAST** | BULLISH | 1/10 | $1.02 | +0.5% | 0.8x |
-| **PDYN** | BULLISH | 1/10 | $2.81 | -2.1% | 0.6x |
-| **HUYA** | BULLISH | 1/10 | $2.24 | +9.0% | 1.8x |
-| **TSQ** | BULLISH | 1/10 | $1.32 | +6.9% | 1.8x |
-| **RCAT** | BEARISH | 1/10 | $2.20 | -8.7% | 1.6x |
+| **TROX** | BEARISH | 3/10 | $1.50 | -21.8% | 15.6x |
+| **ANTX** | BULLISH | 3/10 | $4.99 | +18.0% | 3.8x |
+| **DUOT** | BULLISH | 3/10 | $3.41 | +0.6% | 2.1x |
+| **DDD** | BEARISH | 3/10 | $1.41 | +2.2% | 2.9x |
+| **DSX** | BULLISH | 2/10 | $2.27 | -0.4% | 3.9x |
+| **VYGR** | BULLISH | 2/10 | $1.64 | +7.9% | 0.8x |
+| **ENVX** | BEARISH | 2/10 | $1.47 | +7.3% | 0.8x |
+| **TE** | BEARISH | 2/10 | $1.41 | +6.0% | 0.8x |
+| **GPUS** | BEARISH | 2/10 | $0.16 | +5.9% | 0.4x |
+| **ONDS** | BEARISH | 2/10 | $4.45 | +1.4% | 0.7x |
+| **NPWR** | BULLISH | 1/10 | $0.97 | +15.5% | 2.8x |
+| **YSS** | BEARISH | 1/10 | $3.91 | -8.0% | 3.1x |
+| **BEEM** | BEARISH | 1/10 | $0.59 | -3.6% | 1.3x |
+| **SID** | BULLISH | 1/10 | $0.61 | -3.6% | 3.3x |
+| **OWLT** | BULLISH | 1/10 | $3.65 | +12.3% | 2.3x |
+| **PAL** | BULLISH | 1/10 | $2.96 | +18.9% | 1.5x |
+| **OPTU** | BULLISH | 1/10 | $0.69 | +7.0% | 2.3x |
+| **WVE** | BULLISH | 1/10 | $2.79 | -1.8% | 0.8x |
+| **SMR** | BEARISH | 1/10 | $3.93 | -3.9% | 2.5x |
+| **AEI** | BULLISH | 1/10 | $0.48 | +7.5% | 0.0x |
+
+### CUE · BULLISH 6/10
+- New 8-K filed 2026-11-16 (material event)
+- Up 74% today
+- Volume 37.1x normal
+- StockTwits 100% bullish (8 tagged posts)
+- Volume today = 1.8x the entire float
+- Low float: 7.3M shares (moves fast both ways)
+- _Track record at this strength: not enough data yet (6 graded calls). Treat as unproven._
 
 ### SPCE · BEARISH 6/10
 - News -: Virgin Galactic (SPCE) Stock Sees Fair Value Cut After Flight Delay Drives Analyst Target Cuts [analyst/price target]
 - New 8-K filed 2026-11-13 (material event)
-- Volume 3.2x normal
-- StockTwits 50% bullish (12 tagged posts)
+- Down 8% today
+- Volume 3.1x normal
+- StockTwits 62% bullish (13 tagged posts)
 - Short interest 27% of float (squeeze fuel)
 - ⚠️ Dilution filing(s) in last 30d: 424B5
 - ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
 - _Track record at this strength: not enough data yet (15 graded calls). Treat as unproven._
 
-### TROX · BEARISH 4/10
-- New 8-K filed 2026-11-05 (material event)
-- Down 32% today
-- Volume 13.5x normal
-- StockTwits 22% bullish (9 tagged posts)
+### IMDX · BEARISH 4/10
+- 8-K just filed with the SEC (126m ago)
+- New 8-K filed 2026-11-18 (material event)
+- Down 11% today
+- Volume 3.1x normal
+- StockTwits 86% bullish (14 tagged posts)
+- ⚠️ Dilution filing(s) in last 30d: 424B5
 - ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
 - _Track record at this strength: not enough data yet (15 graded calls). Treat as unproven._
 
-### ANGX · BULLISH 4/10
-- News +: Angel Studios stock rises on Russell 2000, 3000 inclusion [other]
-- New 8-K filed 2026-11-10 (material event)
-- Up 6% today
-- Volume 4.0x normal
-- StockTwits 100% bullish (12 tagged posts)
-- _Track record at this strength: not enough data yet (6 graded calls). Treat as unproven._
-
 ### PLCE · BULLISH 4/10
+- News ~: Nike's Extra $5 Billion Still Leaves Sales Below 2024 [market recap/noise]
 - News ~: How Much Downside Is Left In Nike Stock? [market recap/noise]
-- News ~: Why Did Nike Stock Move? [market recap/noise]
 - New 8-K filed 2026-11-16 (material event)
 - Up 41% today
-- StockTwits 82% bullish (17 tagged posts)
+- StockTwits 86% bullish (14 tagged posts)
 - Short interest 43% of float (squeeze fuel)
 - Low float: 7.6M shares (moves fast both ways)
 - ⚠️ Under $1: delisting risk, wide spreads
 - _Track record at this strength: not enough data yet (6 graded calls). Treat as unproven._
 
-### OPEN · BULLISH 4/10
-- New 8-K filed 2026-11-05 (material event)
-- Up 15% today
-- StockTwits 100% bullish (20 tagged posts)
-- Short interest 28% of float (squeeze fuel)
-- _Track record at this strength: not enough data yet (6 graded calls). Treat as unproven._
-
-### NRXP · BULLISH 4/10
-- News +: NRx (NRXP) Q3 2026 Earnings Call Transcript [earnings/guidance]
-- New 8-K filed 2026-11-02 (material event)
-- Up 15% today
-- StockTwits 100% bullish (14 tagged posts)
-- Short interest 25% of float (squeeze fuel)
-- _Track record at this strength: not enough data yet (6 graded calls). Treat as unproven._
-
-### JRVR · BULLISH 3/10
-- 8-K just filed with the SEC (294m ago)
+### TROX · BEARISH 3/10
 - New 8-K filed 2026-11-18 (material event)
-- Volume 6.6x normal
-- StockTwits 100% bullish (8 tagged posts)
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### MEDS · BEARISH 3/10
-- New 8-K filed 2026-11-17 (material event)
-- Up 11% today
-- Volume 5.6x normal
-- StockTwits 78% bullish (9 tagged posts)
-- Volume today = 1.5x the entire float
-- Low float: 1.5M shares (moves fast both ways)
-- ⚠️ Dilution filing(s) in last 30d: 424B5, S-1/A
-- ⚠️ Under $1: delisting risk, wide spreads
+- Down 22% today
+- Volume 15.6x normal
+- StockTwits 40% bullish (10 tagged posts)
+- Volume today = 0.5x the entire float
 - ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
-### GP · BULLISH 3/10
-- Reddit mentions 74 (24h ago: 3)
-- StockTwits 93% bullish (14 tagged posts)
-- Volume today = 13.6x the entire float
-- Low float: 0.9M shares (moves fast both ways)
+### ANTX · BULLISH 3/10
+- New 8-K filed 2026-11-09 (material event)
+- Up 18% today
+- Volume 3.8x normal
+- StockTwits 100% bullish (12 tagged posts)
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
-### WHLR · BEARISH 3/10
-- 8-K just filed with the SEC (229m ago)
+### DUOT · BULLISH 3/10
+- 8-K just filed with the SEC (103m ago)
 - New 8-K filed 2026-11-18 (material event)
-- Down 6% today
-- StockTwits 93% bullish (14 tagged posts)
-- Short interest 23% of float (squeeze fuel)
-- Low float: 1.7M shares (moves fast both ways)
-- ⚠️ Dilution filing(s) in last 30d: 424B3
-- ⚠️ Under $1: delisting risk, wide spreads
-- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### AKAN · BEARISH 2/10
-- News ~: BC-Most Active Stocks [market recap/noise]
-- Up 77% today
-- Volume 11.8x normal
-- StockTwits 75% bullish (16 tagged posts)
-- ⚠️ Dilution filing(s) in last 30d: F-1/A
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### QTRX · BEARISH 2/10
-- 8-K just filed with the SEC (240m ago)
-- New 8-K filed 2026-11-18 (material event)
-- Down 23% today
-- Volume 9.4x normal
-- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### QSI · BULLISH 2/10
-- 8-K just filed with the SEC (288m ago)
-- New 8-K filed 2026-11-18 (material event)
-- Up 11% today
 - Volume 2.1x normal
-- StockTwits 86% bullish (21 tagged posts)
+- StockTwits 100% bullish (9 tagged posts)
+- Short interest 25% of float (squeeze fuel)
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
-### CD · BULLISH 2/10
-- 8-K just filed with the SEC (354m ago)
+### DDD · BEARISH 3/10
+- New 8-K filed 2026-11-13 (material event)
+- Volume 2.9x normal
+- StockTwits 80% bullish (10 tagged posts)
+- Short interest 26% of float (squeeze fuel)
+- ⚠️ Dilution filing(s) in last 30d: 424B5
+- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### DSX · BULLISH 2/10
+- Volume 3.9x normal
+- StockTwits 100% bullish (11 tagged posts)
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### VYGR · BULLISH 2/10
+- 8-K just filed with the SEC (136m ago)
 - New 8-K filed 2026-11-18 (material event)
-- Up 10% today
-- StockTwits 64% bullish (14 tagged posts)
+- Up 8% today
+- StockTwits 100% bullish (7 tagged posts)
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
-### NFE · BULLISH 2/10
-- New 8-K filed 2026-11-16 (material event)
-- Up 19% today
-- StockTwits 86% bullish (7 tagged posts)
+### ENVX · BEARISH 2/10
+- News -: Enovix (ENVX) Stock Fair Value Moves Lower After Smartphone Pause Spurs Analyst Reset [analyst/price target]
+- News -: Enovix Stock to Remain Under Pressure Until It Delivers Sustained Defense, Smart-Eyewear Revenue, BofA Says [analyst/price target]
+- 8-K just filed with the SEC (131m ago)
+- New 8-K filed 2026-11-18 (material event)
+- Up 7% today
+- StockTwits 100% bullish (14 tagged posts)
+- Short interest 26% of float (squeeze fuel)
+- ⚠️ Dilution filing(s) in last 30d: 424B2, S-3
+- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### TE · BEARISH 2/10
+- 8-K just filed with the SEC (148m ago)
+- New 8-K filed 2026-11-18 (material event)
+- Up 6% today
+- StockTwits 83% bullish (12 tagged posts)
+- Short interest 35% of float (squeeze fuel)
+- ⚠️ Dilution filing(s) in last 30d: 424B5, 424B7
+- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### GPUS · BEARISH 2/10
+- 8-K just filed with the SEC (153m ago)
+- New 8-K filed 2026-11-18 (material event)
+- Up 6% today
+- StockTwits 100% bullish (5 tagged posts)
+- ⚠️ Dilution filing(s) in last 30d: 424B5
+- ⚠️ Under $1: delisting risk, wide spreads
+- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### ONDS · BEARISH 2/10
+- News ~: Red Cat Falls 6% as Post-Earnings Selloff Extends; Unusual Machines Slides 3%, AeroVironment Drops 2% [market recap/noise]
+- News ~: 5 Best Drone Stocks to Buy According to Wall Street Analysts [market recap/noise]
+- 8-K just filed with the SEC (147m ago)
+- New 8-K filed 2026-11-18 (material event)
+- StockTwits 75% bullish (12 tagged posts)
+- Short interest 42% of float (squeeze fuel)
+- ⚠️ Dilution filing(s) in last 30d: 424B7
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### NPWR · BULLISH 1/10
+- New 8-K filed 2026-11-10 (material event)
+- Up 16% today
+- Volume 2.8x normal
+- ⚠️ Under $1: delisting risk, wide spreads
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ## Track record (does it actually work?)
