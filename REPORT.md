@@ -1,149 +1,152 @@
 # Penny stock scanner
-_Last scan: Thu Nov 19, 01:06 PM ET · 40 stocks checked · 38 calls logged so far_
+_Last scan: Thu Nov 19, 07:40 PM ET · 40 stocks checked · 38 calls logged so far_
 
 ## Current signals
 
 | Ticker | Lean | Strength | Price | Today | Volume |
 |---|---|---|---|---|---|
-| **VIVS** | BULLISH | 6/10 | $0.27 | +126.2% | 824.1x |
-| **AKAN** | BEARISH | 6/10 | $3.03 | -24.9% | 0.5x |
-| **LVWR** | BULLISH | 5/10 | $0.46 | +25.2% | 107.7x |
-| **OPEN** | BULLISH | 4/10 | $1.46 | +15.0% | 1.9x |
-| **UAMY** | BULLISH | 4/10 | $2.44 | -3.2% | 2.9x |
-| **RXRX** | BULLISH | 4/10 | $2.81 | -0.7% | 1.7x |
-| **GMM** | BEARISH | 3/10 | $1.74 | +11.9% | 7.9x |
-| **RCAT** | BEARISH | 3/10 | $2.03 | -9.8% | 1.9x |
-| **BMEA** | BULLISH | 3/10 | $0.58 | +8.6% | 1.2x |
-| **PCT** | BULLISH | 3/10 | $1.85 | +1.8% | 1.6x |
-| **GPRO** | BEARISH | 3/10 | $0.55 | -6.2% | 1.1x |
-| **SVRA** | BULLISH | 2/10 | $4.97 | +5.4% | 4.4x |
-| **EMPD** | BULLISH | 2/10 | $2.17 | +9.0% | 3.0x |
-| **HRZN** | BULLISH | 2/10 | $3.19 | +3.2% | 3.0x |
-| **JBI** | BULLISH | 2/10 | $3.54 | +9.6% | 2.1x |
-| **DSX** | BULLISH | 2/10 | $2.25 | -0.4% | 2.4x |
-| **NUAI** | BEARISH | 2/10 | $4.10 | +2.8% | 1.9x |
-| **DDD** | BEARISH | 2/10 | $1.48 | +6.9% | 1.4x |
-| **HUMA** | BULLISH | 2/10 | $0.56 | +11.8% | 0.9x |
-| **XTND** | BULLISH | 2/10 | $1.87 | +12.7% | 0.6x |
-| **MPT** | BULLISH | 2/10 | $1.57 | -4.0% | 1.4x |
-| **GGN** | BULLISH | 1/10 | $4.62 | -1.6% | 2.5x |
-| **EU** | BULLISH | 1/10 | $0.47 | -1.1% | 1.2x |
+| **LVWR** | BULLISH | 6/10 | $0.61 | +64.9% | 92.9x |
+| **AKAN** | BEARISH | 6/10 | $3.36 | -16.6% | 0.5x |
+| **OPEN** | BULLISH | 5/10 | $1.56 | +23.0% | 1.8x |
+| **VIVS** | BULLISH | 4/10 | $0.35 | +189.4% | 688.0x |
+| **GMM** | BEARISH | 3/10 | $1.77 | +14.2% | 4.8x |
+| **PYXS** | BULLISH | 3/10 | $1.70 | +20.6% | 2.3x |
+| **UAMY** | BULLISH | 3/10 | $2.38 | -5.6% | 2.1x |
+| **TE** | BEARISH | 3/10 | $1.26 | -9.4% | 1.6x |
+| **FLWS** | BULLISH | 3/10 | $2.11 | +6.0% | 1.8x |
+| **MPT** | BULLISH | 3/10 | $1.62 | -0.6% | 2.3x |
+| **EU** | BULLISH | 3/10 | $0.48 | +3.0% | 1.0x |
+| **BMEA** | BULLISH | 3/10 | $0.59 | +11.0% | 0.9x |
+| **LYG** | BEARISH | 3/10 | $4.98 | -1.2% | 1.9x |
+| **JBI** | BULLISH | 2/10 | $3.54 | +9.6% | 3.2x |
+| **DSX** | BULLISH | 2/10 | $2.25 | -0.4% | 3.7x |
+| **PMVP** | BULLISH | 2/10 | $1.31 | +7.4% | 2.8x |
+| **RCAT** | BEARISH | 2/10 | $1.94 | -13.8% | 2.0x |
+| **ALXO** | BULLISH | 2/10 | $1.03 | +6.2% | 2.8x |
+| **DDD** | BEARISH | 2/10 | $1.46 | +5.5% | 2.5x |
+| **RXRX** | BULLISH | 2/10 | $2.67 | -5.5% | 2.3x |
+| **NUAI** | BEARISH | 2/10 | $4.20 | +5.3% | 2.0x |
+| **BULL** | BEARISH | 2/10 | $4.57 | -2.1% | 1.6x |
+| **FLO** | BEARISH | 2/10 | $5.01 | -4.6% | 1.7x |
+| **TROX** | BULLISH | 1/10 | $1.64 | +9.9% | 2.8x |
+| **HRZN** | BULLISH | 1/10 | $3.16 | +2.3% | 2.1x |
 
-### VIVS · BULLISH 6/10
-- News +: VivoSim Labs Secures Seven-Figure Pharmaceutical Testing Agreement and Raises Fiscal 2027 Revenue Growth Expec [contract/partnership]
-- News ~: BC-Most Active Stocks [market recap/noise]
-- Up 126% today
-- Volume 824.1x normal
-- StockTwits 100% bullish (10 tagged posts)
+### LVWR · BULLISH 6/10
+- New 8-K filed 2026-11-17 (material event)
+- Up 65% today
+- Volume 92.9x normal
+- StockTwits 94% bullish (16 tagged posts)
+- Volume today = 4.8x the entire float
 - ⚠️ Under $1: delisting risk, wide spreads
 - _Track record at this strength: not enough data yet (10 graded calls). Treat as unproven._
 
 ### AKAN · BEARISH 6/10
-- Down 25% today
-- StockTwits 90% bullish (21 tagged posts)
-- Volume today = 6.9x the entire float
+- Down 17% today
+- StockTwits 100% bullish (16 tagged posts)
+- Volume today = 11.4x the entire float
 - Low float: 0.7M shares (moves fast both ways)
 - ⚠️ Dilution filing(s) in last 30d: F-1/A
 - _Track record at this strength: not enough data yet (17 graded calls). Treat as unproven._
 
-### LVWR · BULLISH 5/10
-- New 8-K filed 2026-11-17 (material event)
-- Up 25% today
-- Volume 107.7x normal
-- StockTwits 85% bullish (20 tagged posts)
-- Volume today = 3.1x the entire float
-- ⚠️ Under $1: delisting risk, wide spreads
-- _Track record at this strength: not enough data yet (10 graded calls). Treat as unproven._
-
-### OPEN · BULLISH 4/10
-- News ~: What Is Behind The Move In Tenable Stock? [market recap/noise]
-- News ~: What Are Tenable Stock Investors Overlooking? [market recap/noise]
+### OPEN · BULLISH 5/10
+- News +: Opendoor Director Dana Hamilton Just Cast a Vote of Confidence Near the Stock’s Low [other]
+- News ~: BC-Most Active Stocks [market recap/noise]
 - New 8-K filed 2026-11-05 (material event)
-- Up 15% today
-- StockTwits 100% bullish (19 tagged posts)
+- Up 23% today
+- Reddit mentions 18 (24h ago: 6)
+- StockTwits 92% bullish (13 tagged posts)
 - Short interest 28% of float (squeeze fuel)
 - _Track record at this strength: not enough data yet (10 graded calls). Treat as unproven._
 
-### UAMY · BULLISH 4/10
-- News +: Washington eyes Chad–Cameroon antimony corridor as China’s US export ban suspension nears expiry [product/business update]
-- New 8-K filed 2026-11-17 (material event)
-- Volume 2.9x normal
-- StockTwits 100% bullish (14 tagged posts)
-- Short interest 27% of float (squeeze fuel)
-- _Track record at this strength: not enough data yet (10 graded calls). Treat as unproven._
-
-### RXRX · BULLISH 4/10
-- News +: Stock Market Today, Nov. 18: Recursion Pharmaceuticals Rises 4% on FDA Alignment for REC-4881 Phase 3 Design [clinical/FDA]
-- New 8-K filed 2026-11-02 (material event)
-- StockTwits 93% bullish (14 tagged posts)
-- Short interest 24% of float (squeeze fuel)
+### VIVS · BULLISH 4/10
+- News +: VivoSim Labs Secures Seven-Figure Pharmaceutical Testing Agreement and Raises Fiscal 2027 Revenue Growth Expec [contract/partnership]
+- News ~: BC-Most Active Stocks [market recap/noise]
+- Up 189% today
+- Volume 688.0x normal
+- StockTwits 57% bullish (14 tagged posts)
+- ⚠️ Under $1: delisting risk, wide spreads
 - _Track record at this strength: not enough data yet (10 graded calls). Treat as unproven._
 
 ### GMM · BEARISH 3/10
-- Up 12% today
-- Volume 7.9x normal
-- StockTwits 80% bullish (15 tagged posts)
+- Up 14% today
+- Volume 4.8x normal
+- StockTwits 78% bullish (18 tagged posts)
 - ⚠️ Dilution filing(s) in last 30d: 424B5
 - ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
-### RCAT · BEARISH 3/10
-- News -: Unusual Machines Rallies 7% on Oppenheimer’s $30 Target; Red Cat Falls 7% in Extended Post-Earnings Rout, Onda [earnings/guidance]
-- News ~: AeroVironment Is Near Its 52-Week Low. Will AVAV Stock Hit $50 or $150 First? [market recap/noise]
-- New 8-K filed 2026-11-16 (material event)
-- Down 10% today
-- StockTwits 0% bullish (14 tagged posts)
-- Short interest 28% of float (squeeze fuel)
+### PYXS · BULLISH 3/10
+- New 8-K filed 2026-11-19 (material event)
+- Up 21% today
+- Volume 2.3x normal
+- StockTwits 100% bullish (9 tagged posts)
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### UAMY · BULLISH 3/10
+- News +: Washington eyes Chad–Cameroon antimony corridor as China’s US export ban suspension nears expiry [product/business update]
+- New 8-K filed 2026-11-17 (material event)
+- Down 6% today
+- Volume 2.1x normal
+- StockTwits 91% bullish (11 tagged posts)
+- Short interest 27% of float (squeeze fuel)
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### TE · BEARISH 3/10
+- News ~: Can T1 Energy's Growing Order Book Drive US Solar Expansion? [analyst/price target]
+- New 8-K filed 2026-11-18 (material event)
+- Down 9% today
+- StockTwits 88% bullish (8 tagged posts)
+- Short interest 35% of float (squeeze fuel)
+- ⚠️ Dilution filing(s) in last 30d: 424B5, 424B7
 - ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### FLWS · BULLISH 3/10
+- New 8-K filed 2026-11-05 (material event)
+- Up 6% today
+- StockTwits 83% bullish (12 tagged posts)
+- Short interest 36% of float (squeeze fuel)
+- Low float: 7.7M shares (moves fast both ways)
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### MPT · BULLISH 3/10
+- New 8-K filed 2026-10-29 (material event)
+- Volume 2.3x normal
+- StockTwits 100% bullish (6 tagged posts)
+- Short interest 33% of float (squeeze fuel)
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### EU · BULLISH 3/10
+- New 8-K filed 2026-11-12 (material event)
+- Reddit mentions 16 (24h ago: 1)
+- StockTwits 93% bullish (14 tagged posts)
+- ⚠️ Under $1: delisting risk, wide spreads
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ### BMEA · BULLISH 3/10
 - New 8-K filed 2026-11-10 (material event)
-- Up 9% today
-- StockTwits 100% bullish (10 tagged posts)
+- Up 11% today
+- StockTwits 100% bullish (6 tagged posts)
 - Short interest 26% of float (squeeze fuel)
 - ⚠️ Under $1: delisting risk, wide spreads
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
-### PCT · BULLISH 3/10
-- New 8-K filed 2026-11-04 (material event)
-- StockTwits 100% bullish (10 tagged posts)
-- Short interest 47% of float (squeeze fuel)
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### GPRO · BEARISH 3/10
-- New 8-K filed 2026-11-16 (material event)
-- Down 6% today
-- StockTwits 85% bullish (13 tagged posts)
-- ⚠️ Dilution filing(s) in last 30d: 424B3
-- ⚠️ Under $1: delisting risk, wide spreads
-- ⚠️ Shorting sub-$3 stocks is often impossible or very costly to borrow
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### SVRA · BULLISH 2/10
-- Up 5% today
-- Volume 4.4x normal
-- StockTwits 94% bullish (18 tagged posts)
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### EMPD · BULLISH 2/10
-- New 8-K filed 2026-11-16 (material event)
-- Up 9% today
-- Volume 3.0x normal
-- StockTwits 86% bullish (14 tagged posts)
-- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
-
-### HRZN · BULLISH 2/10
-- New 8-K filed 2026-11-05 (material event)
-- Volume 3.0x normal
-- StockTwits 86% bullish (14 tagged posts)
+### LYG · BEARISH 3/10
+- News ~: European Equities Traded in the US as American Depositary Receipts Decline in Thursday Trading [market recap/noise]
+- StockTwits 75% bullish (8 tagged posts)
+- ⚠️ Dilution filing(s) in last 30d: 424B2
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ### JBI · BULLISH 2/10
 - New 8-K filed 2026-11-10 (material event)
 - Up 10% today
-- Volume 2.1x normal
-- StockTwits 88% bullish (8 tagged posts)
+- Volume 3.2x normal
+- StockTwits 89% bullish (9 tagged posts)
+- _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
+
+### DSX · BULLISH 2/10
+- Volume 3.7x normal
+- StockTwits 100% bullish (11 tagged posts)
 - _Track record at this strength: not enough data yet (0 graded calls). Treat as unproven._
 
 ## Track record (does it actually work?)
